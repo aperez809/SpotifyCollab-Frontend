@@ -16,8 +16,44 @@ export class SpotifyServiceClient {
         console.log(this.refreshToken);
     }
 
-    getCurrentUserPlaylists() {
+    getCurrentUserPlaylists = () => {
         let requestUrl = this.requestBaseUrl + "/me/playlists"
+        console.log(requestUrl);
+        return fetch(requestUrl, {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + this.token
+            }
+        })
+            .then(response => {return response.json()})
+    }
+
+    getCurrentUserLibrary = () => {
+        let requestUrl = this.requestBaseUrl + "/me/tracks"
+        console.log(requestUrl);
+        return fetch(requestUrl, {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + this.token
+            }
+        })
+            .then(response => {return response.json()})
+    }
+
+    getCurrentUserRecent = () => {
+        let requestUrl = this.requestBaseUrl + "/me/player/recently-played"
+        console.log(requestUrl);
+        return fetch(requestUrl, {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + this.token
+            }
+        })
+            .then(response => {return response.json()})
+    }
+
+    getCurrentUserFollowing = () => {
+        let requestUrl = this.requestBaseUrl + "/me/following?type=artist"
         console.log(requestUrl);
         return fetch(requestUrl, {
             method: 'GET',

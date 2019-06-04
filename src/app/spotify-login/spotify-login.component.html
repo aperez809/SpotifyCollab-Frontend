@@ -3,12 +3,13 @@
   <a 
     role="button" 
     class="btn btn-success"
+    (click)="spotifyLogIn()"
     href='http://localhost:8888'>
       Login to Spotify
   </a>
 
 
-  <div class="col-12 col-lg-6 mt-3">
+  <div class="col-12 col-lg-6 mt-3" *ngIf="loggedInToSpotify">
     <ul class="nav nav-tabs">
       <li class="nav-item" (click)="selectTab('playlist')">
         <a class="nav-link" [ngClass]="{active: selectedTab === 'playlist'}" href="#">
@@ -33,12 +34,28 @@
     </ul>
   </div>
 
-  <div [ngSwitch]="selectedTab">
+  <div class="mt-2" [ngSwitch]="selectedTab">
     <ul class="list-group" *ngSwitchCase="'playlist'">
       <li *ngFor="let playlist of playlists" class="list-group-item">
         {{ playlist.name }}
       </li>
     </ul>
+    <ul class="list-group" *ngSwitchCase="'library'">
+      <li *ngFor="let track of tracks" class="list-group-item">
+        {{ track.track.name }}
+      </li>
+    </ul>
+    <ul class="list-group" *ngSwitchCase="'recent'">
+      <li *ngFor="let recentTrack of recent" class="list-group-item">
+        {{ recentTrack.track.name }}
+      </li>
+    </ul>
+    <ul class="list-group" *ngSwitchCase="'following'">
+      <li *ngFor="let artist of following" class="list-group-item">
+        {{ artist.name }}
+      </li>
+    </ul>
+      
     <ul *ngSwitchDefault></ul>
   </div>
 </div>
