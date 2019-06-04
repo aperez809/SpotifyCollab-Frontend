@@ -8,6 +8,7 @@ import { SpotifyServiceClient } from '../services/spotify-service-client';
 })
 export class SpotifyLoginComponent implements OnInit {
   private loggedInToSpotify : boolean;
+  selectedTab = '';
   playlists = [];
 
   constructor(private spotifyService: SpotifyServiceClient) {
@@ -15,6 +16,26 @@ export class SpotifyLoginComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  selectTab = tabType => {
+    switch (tabType) {
+      case 'playlist':
+        this.selectedTab = 'playlist';
+        this.getUserCurrentPlaylists();
+        break;
+      case 'library':
+        this.selectedTab = 'library';
+        break;
+      case 'recent':
+        this.selectedTab = 'recent';
+        break;
+      case 'following':
+        this.selectedTab = 'following';
+        break;
+      default:
+        break;
+    }
   }
 
   getUserCurrentPlaylists() {

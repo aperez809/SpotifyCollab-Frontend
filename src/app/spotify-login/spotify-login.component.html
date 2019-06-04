@@ -7,18 +7,38 @@
       Login to Spotify
   </a>
 
-  <button
-    type="button" 
-    class="btn btn-primary"
-    (click)="getUserCurrentPlaylists()">
-      Get My Playlists
-  </button>
 
-  <div>
-    <ul class="list-group">
+  <div class="col-12 col-lg-6 mt-3">
+    <ul class="nav nav-tabs">
+      <li class="nav-item" (click)="selectTab('playlist')">
+        <a class="nav-link" [ngClass]="{active: selectedTab === 'playlist'}" href="#">
+        Playlists
+        </a>
+      </li>
+      <li class="nav-item" (click)="selectTab('library')">
+        <a class="nav-link" [ngClass]="{active: selectedTab === 'library'}" href="#">
+          Library
+        </a>
+      </li>
+      <li class="nav-item" (click)="selectTab('recent')">
+        <a class="nav-link" [ngClass]="{active: selectedTab === 'recent'}" href="#">
+          Recently Played
+        </a>
+      </li>
+      <li class="nav-item" (click)="selectTab('following')">
+        <a class="nav-link" [ngClass]="{active: selectedTab === 'following'}" href="#">
+          Following
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div [ngSwitch]="selectedTab">
+    <ul class="list-group" *ngSwitchCase="'playlist'">
       <li *ngFor="let playlist of playlists" class="list-group-item">
         {{ playlist.name }}
       </li>
     </ul>
+    <ul *ngSwitchDefault></ul>
   </div>
 </div>
