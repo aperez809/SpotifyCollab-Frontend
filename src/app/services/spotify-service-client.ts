@@ -16,6 +16,14 @@ export class SpotifyServiceClient {
         console.log(this.refreshToken);
     }
 
+    loggedIn = () => {
+        console.log(this.token)
+        if (this.token == null) {
+            return false;
+        }
+        return true;
+    }
+
     getCurrentUserPlaylists = () => {
         let requestUrl = this.requestBaseUrl + "/me/playlists"
         console.log(requestUrl);

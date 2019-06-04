@@ -15,17 +15,15 @@ export class SpotifyLoginComponent implements OnInit {
   following = [];
 
   constructor(private spotifyService: SpotifyServiceClient) {
-    this.loggedInToSpotify = true;
+    this.loggedInToSpotify = this.spotifyService.loggedIn();
+    console.log(this.loggedInToSpotify)
   }
 
   ngOnInit() {
   }
 
-  spotifyLogIn = () => {
-    this.loggedInToSpotify = true;
-  }
-
   selectTab = tabType => {
+    console.log(this.loggedInToSpotify);
     switch (tabType) {
       case 'playlist':
         this.selectedTab = 'playlist';
