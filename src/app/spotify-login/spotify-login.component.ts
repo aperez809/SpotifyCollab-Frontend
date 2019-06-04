@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from '../services/spotify-service';
 
 @Component({
   selector: 'app-spotify-login',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./spotify-login.component.css']
 })
 export class SpotifyLoginComponent implements OnInit {
+  private loggedInToSpotify : boolean;
 
-  constructor() { }
+  constructor(private spotifyService: SpotifyService) {
+    this.loggedInToSpotify = false;
+   }
 
   ngOnInit() {
   }
