@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyServiceClient } from '../services/spotify-service-client';
 
 @Component({
-  selector: 'app-spotify-login',
-  templateUrl: './spotify-login.component.html',
-  styleUrls: ['./spotify-login.component.css']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class SpotifyLoginComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   private loggedInToSpotify : boolean;
   selectedTab = '';
   playlists = [];
@@ -16,7 +16,6 @@ export class SpotifyLoginComponent implements OnInit {
 
   constructor(private spotifyService: SpotifyServiceClient) {
     this.loggedInToSpotify = this.spotifyService.loggedIn();
-    console.log(this.loggedInToSpotify)
   }
 
   ngOnInit() {
