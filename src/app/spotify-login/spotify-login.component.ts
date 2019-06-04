@@ -8,12 +8,19 @@ import { SpotifyService } from '../services/spotify-service';
 })
 export class SpotifyLoginComponent implements OnInit {
   private loggedInToSpotify : boolean;
+  playlists = [];
 
   constructor(private spotifyService: SpotifyService) {
     this.loggedInToSpotify = false;
   }
 
   ngOnInit() {
+  }
+
+  getUserCurrentPlaylists() {
+    console.log("getting playlists")
+    this.spotifyService
+      .getCurrentUserPlaylists()
   }
 
 }

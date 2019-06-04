@@ -4,14 +4,23 @@ import { Injectable } from '@angular/core';
 export class SpotifyService {
     private token : string;
     private refreshToken : string;
+    private requestBaseUrl: string;
 
     constructor() {
         const params = this.getHashParams();
         this.token = params["access_token"];
         this.refreshToken = params["refresh_token"];
+        this.requestBaseUrl = "https://api.spotify.com/v1";
         console.log(params);
         console.log(this.token);
         console.log(this.refreshToken);
+    }
+
+    getCurrentUserPlaylists() {
+        let requestUrl = this.requestBaseUrl + "/me/playlists"
+        console.log(requestUrl);
+        fetch(requestUrl)
+            .then(response => response.json())
     }
 
     getHashParams() {
