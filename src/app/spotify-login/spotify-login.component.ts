@@ -11,7 +11,7 @@ export class SpotifyLoginComponent implements OnInit {
 
   constructor(private spotifyService: SpotifyService) {
     this.loggedInToSpotify = false;
-   }
+  }
 
   ngOnInit() {
   }

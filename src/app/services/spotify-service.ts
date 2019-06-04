@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import SpotifyWebApi from 'spotify-web-api-js';
 
 @Injectable()
 export class SpotifyService {
+    private token : string;
+    private refreshToken : string;
 
     constructor() {
         const params = this.getHashParams();
-        const token = params["access_token"];
-        const spotifyApi = new SpotifyWebApi();
-        if (token) {
-            spotifyApi.setAccessToken(token);
-        }
+        this.token = params["access_token"];
+        this.refreshToken = params["refresh_token"];
         console.log(params);
-        console.log(token);
+        console.log(this.token);
+        console.log(this.refreshToken);
     }
 
     getHashParams() {
@@ -26,5 +25,4 @@ export class SpotifyService {
         }
         return hashParams;
     }
-
 }
