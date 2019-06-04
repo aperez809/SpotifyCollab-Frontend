@@ -6,8 +6,13 @@ export class SpotifyService {
 
     constructor() {
         const params = this.getHashParams();
+        const token = params["access_token"];
         const spotifyApi = new SpotifyWebApi();
+        if (token) {
+            spotifyApi.setAccessToken(token);
+        }
         console.log(params);
+        console.log(token);
     }
 
     getHashParams() {
@@ -21,4 +26,5 @@ export class SpotifyService {
         }
         return hashParams;
     }
+
 }
