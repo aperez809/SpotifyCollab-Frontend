@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SpotifyLoginComponent } from './spotify-login/spotify-login.component';
-import { SpotifyService } from './services/spotify-service';
+import { SpotifyServiceClient } from './services/spotify-service-client';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { SpotifyService } from './services/spotify-service';
     AppRoutingModule
   ],
   providers: [
-    SpotifyService
+    SpotifyServiceClient
   ],
   bootstrap: [AppComponent]
 })

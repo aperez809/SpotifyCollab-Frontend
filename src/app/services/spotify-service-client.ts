@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class SpotifyService {
+export class SpotifyServiceClient {
     private token : string;
     private refreshToken : string;
     private requestBaseUrl: string;
