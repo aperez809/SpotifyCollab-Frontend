@@ -21,6 +21,7 @@ export class SpotifyLoginComponent implements OnInit {
     console.log("getting playlists")
     this.spotifyService
       .getCurrentUserPlaylists()
+      .then(response => this.playlists = response.items)
   }
 
 }

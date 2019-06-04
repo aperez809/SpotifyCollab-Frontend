@@ -13,4 +13,12 @@
     (click)="getUserCurrentPlaylists()">
       Get My Playlists
   </button>
+
+  <div>
+    <ul class="list-group">
+      <li *ngFor="let playlist of playlists" class="list-group-item">
+        {{ playlist.name }}
+      </li>
+    </ul>
+  </div>
 </div>

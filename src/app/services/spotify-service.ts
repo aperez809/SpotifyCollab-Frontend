@@ -19,13 +19,13 @@ export class SpotifyService {
     getCurrentUserPlaylists() {
         let requestUrl = this.requestBaseUrl + "/me/playlists"
         console.log(requestUrl);
-        fetch(requestUrl, {
+        return fetch(requestUrl, {
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + this.token
             }
         })
-            .then(response => response.json())
+            .then(response => {return response.json()})
     }
 
     getHashParams() {
