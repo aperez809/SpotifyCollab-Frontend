@@ -8,6 +8,10 @@
     height: 25px;
 }
 
+.spotify-logo {
+    width: 200px;
+}
+
 @media only screen and (max-width: 1199.98px) {
     .profile-pic {
         width: 250px;
