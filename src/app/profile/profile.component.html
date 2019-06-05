@@ -1,40 +1,62 @@
-<div class="container">
-  <h1>Profile</h1>
-  <a 
-    role="button" 
-    class="btn btn-success"
-    *ngIf="!loggedInToSpotify"
-    href='http://localhost:8888'>
-      Login to Spotify
-  </a>
+<div class="container-fluid row">
+  <div class="col-4">
+    <div>
+      <img src={{user.profilePicturePath}} alt="Profile Picture" class="profile-pic">
+      <div class="ml-1">
+          <h2 class="font-weight-bold mt-4">{{ user.firstname }} {{ user.lastname }}</h2>
+          <h4 class="font-weight-light text-muted">{{ user.username }}</h4>
+          <h5 class="mt-4" *ngIf="loggedInToSpotify">
+              <span>
+                  <img inline src="assets/images/Spotify_Icon_RGB_Green.png" alt="Spotify" class="spotify-icon mb-1 mr-1">
+              </span>
+              {{ user.spotifyUsername }}
+          </h5>
+          <h5 class="mt-4" *ngIf="!loggedInToSpotify">
+              <span>
+                  <img inline src="assets/images/Spotify_Icon_RGB_Green.png" alt="Spotify" class="spotify-icon mb-1">
+              </span>
+              <a href='http://localhost:8888'>
+                Connect Spotify
+              </a>
+          </h5>
+      </div>
+    </div>
+  </div>
 
 
-  <div class="col-12 col-lg-6 mt-3" *ngIf="loggedInToSpotify">
+  <div class="col-8" *ngIf="!loggedInToSpotify">
+      <a 
+      role="button" 
+      class="btn btn-success btn-block"
+      href='http://localhost:8888'>
+        Connect Spotify
+    </a>
+  </div>
+  <div class="col-8" *ngIf="loggedInToSpotify">
     <ul class="nav nav-tabs">
       <li class="nav-item" (click)="selectTab('playlist')">
-        <a class="nav-link" [ngClass]="{active: selectedTab === 'playlist'}" href="#">
+        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'playlist'}" href="#">
         Playlists
         </a>
       </li>
       <li class="nav-item" (click)="selectTab('library')">
-        <a class="nav-link" [ngClass]="{active: selectedTab === 'library'}" href="#">
+        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'library'}" href="#">
           Library
         </a>
       </li>
       <li class="nav-item" (click)="selectTab('recent')">
-        <a class="nav-link" [ngClass]="{active: selectedTab === 'recent'}" href="#">
+        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'recent'}" href="#">
           Recently Played
         </a>
       </li>
       <li class="nav-item" (click)="selectTab('following')">
-        <a class="nav-link" [ngClass]="{active: selectedTab === 'following'}" href="#">
+        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'following'}" href="#">
           Following
         </a>
       </li>
     </ul>
-  </div>
 
-  <div class="mt-2" [ngSwitch]="selectedTab">
+  <div class="mt-2 ml-3 mr-3" [ngSwitch]="selectedTab">
     <ul class="list-group" *ngSwitchCase="'playlist'">
       <li *ngFor="let playlist of playlists" class="list-group-item">
         {{ playlist.name }}
@@ -57,5 +79,6 @@
     </ul>
       
     <ul *ngSwitchDefault></ul>
+  </div>
   </div>
 </div>

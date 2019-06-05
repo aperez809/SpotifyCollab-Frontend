@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SpotifyServiceClient } from '../services/spotify-service-client';
 
 @Component({
@@ -7,6 +7,7 @@ import { SpotifyServiceClient } from '../services/spotify-service-client';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  @Input() user : JSON;
   private loggedInToSpotify : boolean;
   selectedTab = '';
   playlists = [];

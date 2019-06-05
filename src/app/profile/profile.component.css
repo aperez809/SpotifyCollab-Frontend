@@ -1,0 +1,30 @@
+.profile-pic {
+    width: 250px;
+    height: 250px;
+}
+
+.spotify-icon {
+    width: 25px;
+    height: 25px;
+}
+
+@media only screen and (max-width: 1199.98px) {
+    .profile-pic {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+@media only screen and (max-width: 991.98px) {
+    .profile-pic {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media only screen and (max-width: 767.98px) {
+    .profile-pic {
+        width: 100px;
+        height: 100px;
+    }
+}
