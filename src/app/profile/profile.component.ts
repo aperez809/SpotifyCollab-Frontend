@@ -9,6 +9,7 @@ import { SpotifyServiceClient } from '../services/spotify-service-client';
 export class ProfileComponent implements OnInit {
   @Input() user : JSON;
   private loggedInToSpotify : boolean;
+  spotifyUser;
   selectedTab = '';
   playlists = [];
   tracks = [];
@@ -20,6 +21,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  connectSpotify = () => {
+    this.spotifyService
+      .getCurrentProfile()
+      .then(response => this.spotifyUser = response.display_name)
   }
 
   selectTab = tabType => {

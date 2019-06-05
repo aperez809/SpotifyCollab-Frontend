@@ -5,6 +5,8 @@ export class SpotifyServiceClient {
     private token : string;
     private refreshToken : string;
     private requestBaseUrl: string;
+    private displayName: string;
+    private userHref: string;
 
     constructor() {
         const params = this.getHashParams();
@@ -22,6 +24,18 @@ export class SpotifyServiceClient {
             return false;
         }
         return true;
+    }
+
+    getCurrentProfile = () => {
+        let requestUrl = this.requestBaseUrl + "/me"
+        console.log(requestUrl);
+        return fetch(requestUrl, {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + this.token
+            }
+        })
+            .then(response => {return response.json()})
     }
 
     getCurrentUserPlaylists = () => {
