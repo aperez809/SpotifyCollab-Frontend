@@ -7,16 +7,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Song Request';
+  activeComponent = 'profile';
   user = {
-    username: 'welchdaniel',
+    username: 'username',
     password:'password',
-    firstname: 'Daniel',
-    lastname: 'Welch',
+    firstname: 'First',
+    lastname: 'Last',
     dob: '',
     profilePicturePath: 'assets/images/vinyl-background.png',
     spotifyUser: false,
-    spotifyUsername: 'danielwelch3321',
+    spotifyUsername: '',
     spotifyUrl: '',
     loggedIn: false
+  }
+
+  selectComponent = component => {
+    this.activeComponent = component;
   }
 }
