@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpotifyServiceClient } from '../services/spotify-service-client';
 
 @Component({
   selector: 'app-search',
@@ -9,7 +10,7 @@ export class SearchComponent implements OnInit {
   searchType = 'track';
   searchContent = '';
 
-  constructor() { }
+  constructor(private spotifyService: SpotifyServiceClient) { }
 
   ngOnInit() {
   }
@@ -29,9 +30,13 @@ export class SearchComponent implements OnInit {
         urlArray.push(character);
       }
     })
+    return (urlArray.join(""));
+  }
 
-    console.log(urlArray.join(""));
-
+  search = () => {
+    let content = this.urlifyContent();
+    let type = this.searchType;
+    this.spotifyService.searchForItem(content, type);
   }
 
   outputSearchContent = () => {
