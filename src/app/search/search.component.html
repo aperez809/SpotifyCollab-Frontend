@@ -1,7 +1,13 @@
 <div class="container">
+  <div class="col-12">
+    <label class="mr-3">
+      <h5>
+        Search by:
+      </h5>
+    </label>
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-secondary"
-          [ngClass]="{active: searchType === 'track'}"
+          [ngClass]="{'active btn-success' : searchType === 'track'}"
           (click)="selectSearchType('track')">
         <input type="radio" 
             name="searchType" 
@@ -10,7 +16,7 @@
           Song
       </label>
       <label class="btn btn-secondary"
-          [ngClass]="{active: searchType === 'artist'}"
+          [ngClass]="{'active btn-success' : searchType === 'artist'}"
           (click)="selectSearchType('artist')">
         <input type="radio" 
             name="searchType" 
@@ -19,7 +25,7 @@
           Artist
       </label>
       <label class="btn btn-secondary"
-          [ngClass]="{active: searchType === 'album'}"
+          [ngClass]="{'active btn-success' : searchType === 'album'}"
           (click)="selectSearchType('album')">
         <input type="radio" 
             name="searchType" 
@@ -28,7 +34,7 @@
           Album
       </label>
       <label class="btn btn-secondary"
-          [ngClass]="{active: searchType === 'playlist'}"
+          [ngClass]="{'active btn-success' : searchType === 'playlist'}"
           (click)="selectSearchType('playlist')">
         <input type="radio" 
             name="searchType" 
@@ -36,6 +42,17 @@
             autocomplete="off"> 
           Playlist
       </label>
-      
     </div>
+  </div>
+
+  <div class="col-12 mt-3">
+    <div class="row">
+      <input 
+          class="form-control col-10"  
+          placeholder="Search" 
+          aria-label="Search" 
+          (keyup)="updateSearchContent($event)">
+      <button class="btn btn-success col-2"(click)="outputSearchContent()">Search</button>
+    </div>
+  </div>
 </div>

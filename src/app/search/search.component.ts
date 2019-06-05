@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
   searchType = 'track';
+  searchContent = '';
 
   constructor() { }
 
@@ -15,6 +16,14 @@ export class SearchComponent implements OnInit {
 
   selectSearchType = searchType => {
     this.searchType = searchType;
+  }
+
+  outputSearchContent = () => {
+    console.log(this.searchContent);
+  }
+
+  updateSearchContent = (event) => {
+    this.searchContent = event.target.value;
   }
 
 }

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Song Request';
-  activeComponent = 'profile';
+  activeComponent = 'search';
   user = {
     username: 'username',
     password:'password',
