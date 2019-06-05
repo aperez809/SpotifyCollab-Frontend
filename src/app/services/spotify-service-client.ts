@@ -26,6 +26,20 @@ export class SpotifyServiceClient {
         return true;
     }
 
+    searchForItem = (searchContent, searchType) => {
+        let requestUrl = this.requestBaseUrl + "/search?q="
+        requestUrl = requestUrl + searchContent;
+        requestUrl = requestUrl + "&type=" + searchType;
+        console.log(requestUrl);
+        return fetch(requestUrl, {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + this.token
+            }
+        })
+            .then(response => {return response.json()})
+    }
+
     getCurrentProfile = () => {
         let requestUrl = this.requestBaseUrl + "/me"
         console.log(requestUrl);

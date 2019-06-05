@@ -18,6 +18,22 @@ export class SearchComponent implements OnInit {
     this.searchType = searchType;
   }
 
+  urlifyContent = () => {
+    let contentArray = this.searchContent.split('');
+    let urlArray = [];
+    contentArray.forEach(character => {
+      if (character == ' ') {
+        urlArray.push('%20');
+      }
+      else {
+        urlArray.push(character);
+      }
+    })
+
+    console.log(urlArray.join(""));
+
+  }
+
   outputSearchContent = () => {
     console.log(this.searchContent);
   }
