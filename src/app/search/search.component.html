@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <label class="btn btn-secondary"
+          [ngClass]="{active: searchType === 'track'}"
+          (click)="selectSearchType('track')">
+        <input type="radio" 
+            name="searchType" 
+            id="track" 
+            autocomplete="off"> 
+          Song
+      </label>
+      <label class="btn btn-secondary"
+          [ngClass]="{active: searchType === 'artist'}"
+          (click)="selectSearchType('artist')">
+        <input type="radio" 
+            name="searchType" 
+            id="artist" 
+            autocomplete="off"> 
+          Artist
+      </label>
+      <label class="btn btn-secondary"
+          [ngClass]="{active: searchType === 'album'}"
+          (click)="selectSearchType('album')">
+        <input type="radio" 
+            name="searchType" 
+            id="album" 
+            autocomplete="off"> 
+          Album
+      </label>
+      <label class="btn btn-secondary"
+          [ngClass]="{active: searchType === 'playlist'}"
+          (click)="selectSearchType('playlist')">
+        <input type="radio" 
+            name="searchType" 
+            id="playlist" 
+            autocomplete="off"> 
+          Playlist
+      </label>
+      
+    </div>
+</div>
