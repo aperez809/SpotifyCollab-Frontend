@@ -9,7 +9,8 @@ import { SpotifyServiceClient } from '../services/spotify-service-client';
 export class ProfileComponent implements OnInit {
   @Input() user : JSON;
   private loggedInToSpotify : boolean;
-  spotifyUser;
+  spotifyUserName = '';
+  spotifyUserUrl = '';
   selectedTab = '';
   playlists = [];
   tracks = [];
@@ -18,18 +19,30 @@ export class ProfileComponent implements OnInit {
 
   constructor(private spotifyService: SpotifyServiceClient) {
     this.loggedInToSpotify = this.spotifyService.loggedIn();
+    if(this.loggedInToSpotify) {
+      this.connectSpotify();
+    }
   }
 
   ngOnInit() {
   }
 
+  logProfile = () => {
+    console.log(this.spotifyUserName);
+    console.log(this.spotifyUserUrl);
+  }
+
   connectSpotify = () => {
     this.spotifyService
       .getCurrentProfile()
-      .then(response => this.spotifyUser = response.display_name)
+      .then(response => {
+        this.spotifyUserName = response.display_name; 
+        this.spotifyUserUrl = response.external_urls.spotify;
+      })
   }
 
   selectTab = tabType => {
+    this.connectSpotify();
     console.log(this.loggedInToSpotify);
     switch (tabType) {
       case 'playlist':

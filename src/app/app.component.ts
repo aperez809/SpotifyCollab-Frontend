@@ -16,6 +16,7 @@ export class AppComponent {
     profilePicturePath: 'assets/images/vinyl-background.png',
     spotifyUser: false,
     spotifyUsername: 'danielwelch3321',
+    spotifyUrl: '',
     loggedIn: false
   }
 }
