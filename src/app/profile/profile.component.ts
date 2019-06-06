@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SpotifyServiceClient } from '../services/spotify-service-client';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user-service-client';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +9,6 @@ import { SpotifyServiceClient } from '../services/spotify-service-client';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  @Input() user : JSON;
   private loggedInToSpotify : boolean;
   spotifyUserName = '';
   spotifyUserUrl = '';
@@ -17,7 +18,14 @@ export class ProfileComponent implements OnInit {
   recent = [];
   following = [];
 
-  constructor(private spotifyService: SpotifyServiceClient) {
+  userId: String;
+  user: Object;
+
+  constructor(
+      private spotifyService: SpotifyServiceClient, 
+      private activatedRoute: ActivatedRoute,
+      private userService: UserService) 
+    {
     this.loggedInToSpotify = this.spotifyService.loggedIn();
     if(this.loggedInToSpotify) {
       this.connectSpotify();
@@ -25,6 +33,11 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(
+      params => {
+        this.userId = params['userId'];
+        this.user = this.userService.findUserById(this.userId);
+      });
   }
 
   logProfile = () => {

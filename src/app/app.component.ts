@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -8,18 +9,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Song Request';
   activeComponent = 'profile';
-  user = {
-    username: 'username',
-    password:'password',
-    firstname: 'First',
-    lastname: 'Last',
-    dob: '',
-    profilePicturePath: 'assets/images/vinyl-background.png',
-    spotifyUser: false,
-    spotifyUsername: '',
-    spotifyUrl: '',
-    loggedIn: false
-  }
+
+  constructor(private modalService: NgbModal) {}
 
   selectComponent = component => {
     this.activeComponent = component;
