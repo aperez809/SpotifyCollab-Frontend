@@ -10,6 +10,8 @@ export class SearchComponent implements OnInit {
   searchType = 'track';
   searchContent = '';
   searchResults = [];
+  searchTitle = '';
+  searchPerformed = false;
 
   constructor(private spotifyService: SpotifyServiceClient) { }
 
@@ -38,23 +40,28 @@ export class SearchComponent implements OnInit {
     if (this.searchContent !== '') {
       let content = this.urlifyContent();
       let type = this.searchType;
+      this.searchPerformed = true;
       switch (this.searchType){
         case 'track':
+          this.searchTitle = 'Songs:';
           this.spotifyService
             .searchForItem(content, type)
             .then(response => this.searchResults = response.tracks.items);
           break;
         case 'artist':
+          this.searchTitle = 'Artists:';
           this.spotifyService
             .searchForItem(content, type)
             .then(response => this.searchResults = response.artists.items);
           break;
         case 'album':
+          this.searchTitle = 'Albums:';
           this.spotifyService
             .searchForItem(content, type)
             .then(response => this.searchResults = response.albums.items);
           break;
         case 'playlist':
+          this.searchTitle = 'Playlists:';
           this.spotifyService
             .searchForItem(content, type)
             .then(response => this.searchResults = response.playlists.items);
