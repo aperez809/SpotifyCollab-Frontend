@@ -55,4 +55,14 @@
       <button class="btn btn-success col-2"(click)="search()">Search</button>
     </div>
   </div>
+
+  <div class="col-12">
+    <div class="mt-2">
+      <ul class="list-group">
+        <li *ngFor="let result of searchResults" class="list-group-item">
+          {{ result.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
