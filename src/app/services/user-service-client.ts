@@ -16,8 +16,19 @@ export class UserService {
             spotifyUrl: '',
             loggedIn: false
         },
-        {_id: 123, username: 'alice', password: 'alice'},
-        {_id: 234, username: 'bob', password: 'bob'}
+        {
+            id: 456,
+            username: 'welchdaniel',
+            password:'password',
+            firstname: 'Dan',
+            lastname: 'Welch',
+            dob: '',
+            profilePicturePath: 'assets/images/vinyl-background.png',
+            spotifyUser: true,
+            spotifyUsername: 'dwelch',
+            spotifyUrl: '',
+            loggedIn: false
+        }
     ];
 
     findUserByCredentials(username: String, password: String) {
