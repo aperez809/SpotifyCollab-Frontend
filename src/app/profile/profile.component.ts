@@ -25,7 +25,8 @@ export class ProfileComponent implements OnInit {
   user = {
     firstname : '',
     lastname : '',
-    username: ''
+    username : '',
+    profilePicturePath : 'assets/images/vinyl-background.png'
   }
 
   constructor(
