@@ -6,7 +6,6 @@
     "start": "node server.js",
     "postinstall": "ng build --aot --prod",
     "heroku-postbuild": "ng build --prod",
-    "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
