@@ -40,31 +40,50 @@
   <div class="col-8" *ngIf="loggedInToSpotify">
     <ul class="nav nav-tabs">
       <li class="nav-item" (click)="selectTab('playlist')">
-        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'playlist'}" href="#">
+        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'playlist'}">
           Playlists
         </a>
       </li>
       <li class="nav-item" (click)="selectTab('library')">
-        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'library'}" href="#">
+        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'library'}">
           Library
         </a>
       </li>
       <li class="nav-item" (click)="selectTab('recent')">
-        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'recent'}" href="#">
+        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'recent'}">
           Recently Played
         </a>
       </li>
       <li class="nav-item" (click)="selectTab('following')">
-        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'following'}" href="#">
+        <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'following'}">
           Following
         </a>
       </li>
     </ul>
+  
+    <div>
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{ selectedPlaylist.name }}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img class="col-12" src={{selectedPlaylist.images[0].url}}/>
+        <p class="col-12">Description: {{selectedPlaylist.description}}</p>
+        <a class="col-12" href={{selectedPlaylist.external_urls.spotify}}>Open in Spotify</a>
+      </div>
+    </ng-template>
+    </div>
 
   <div class="mt-2" [ngSwitch]="selectedTab">
     <ul class="list-group" *ngSwitchCase="'playlist'">
-      <li *ngFor="let playlist of playlists" class="list-group-item">
-        {{ playlist.name }}
+      <li *ngFor="let playlist of playlists" class="list-group-item" (click)=selectPlaylist(playlist.id,content)>
+        <a>{{ playlist.name }}</a>
+        <div *ngIf="playlist.id == selectedID">
+          <img src={{playlist.images[0].url}} />
+        </div>
       </li>
     </ul>
     <ul class="list-group" *ngSwitchCase="'library'">

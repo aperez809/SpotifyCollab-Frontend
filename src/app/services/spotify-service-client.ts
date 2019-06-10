@@ -40,6 +40,18 @@ export class SpotifyServiceClient {
             .then(response => {return response.json()})
     }
 
+    getPlaylistById = id => {
+        let requestUrl = this.requestBaseUrl + "/playlists/" + id;
+        console.log(requestUrl);
+        return fetch(requestUrl, {
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + this.token
+            }
+        })
+            .then(response => {return response.json()})
+    }
+
     getCurrentProfile = () => {
         let requestUrl = this.requestBaseUrl + "/me"
         console.log(requestUrl);

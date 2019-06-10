@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SpotifyServiceClient } from '../services/spotify-service-client';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user-service-client';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-profile',
@@ -13,10 +14,12 @@ export class ProfileComponent implements OnInit {
   spotifyUserName = '';
   spotifyUserUrl = '';
   selectedTab = '';
+  selectedID = '';
   playlists = [];
   tracks = [];
   recent = [];
   following = [];
+  selectedPlaylist = {};
 
   userId: String;
   user: Object;
@@ -24,6 +27,7 @@ export class ProfileComponent implements OnInit {
   constructor(
       private spotifyService: SpotifyServiceClient, 
       private activatedRoute: ActivatedRoute,
+      private modalService: NgbModal,
       private userService: UserService) 
     {
     this.loggedInToSpotify = this.spotifyService.loggedIn();
@@ -40,9 +44,25 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  logProfile = () => {
-    console.log(this.spotifyUserName);
-    console.log(this.spotifyUserUrl);
+  openContent = (content) => {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    }, (reason) => {
+    });
+  }
+
+  selectPlaylist = (id, content) => {
+    this.spotifyService
+      .getPlaylistById(id)
+      .then(response => {
+        this.selectedPlaylist = response;
+      })
+    this.openContent(content);
+  }
+
+  showContent = (id) => {
+    console.log("clicked: ", id);
+    this.selectedID = id;
+    console.log("selected id: ", this.selectedID);
   }
 
   connectSpotify = () => {
