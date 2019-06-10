@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  private loggedInToSpotify : boolean;
+  loggedInToSpotify;
   spotifyUserName = '';
   spotifyUserUrl = '';
   selectedTab = '';
@@ -22,7 +22,11 @@ export class ProfileComponent implements OnInit {
   selectedPlaylist = {};
 
   userId: String;
-  user: Object;
+  user = {
+    firstname : '',
+    lastname : '',
+    username: ''
+  }
 
   constructor(
       private spotifyService: SpotifyServiceClient, 
