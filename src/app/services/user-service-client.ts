@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class UserService { 
+    private requestBaseUrl: string;
+
+    constructor() {
+      this.requestBaseUrl = "http://localhost:3001/api/users";
+    }
+
     users = [
         {
             id: 123,
