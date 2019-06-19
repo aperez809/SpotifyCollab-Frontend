@@ -30,8 +30,8 @@
 
 
   <div class="col-8" *ngIf="!loggedInToSpotify">
-      <a 
-      role="button" 
+      <a
+      role="button"
       class="btn btn-success btn-block"
       href='https://song-request-spotify-server.herokuapp.com/'>
         Connect Spotify
@@ -60,7 +60,7 @@
         </a>
       </li>
     </ul>
-  
+
     <div>
     <ng-template #content let-modal>
       <div class="modal-header">
@@ -101,7 +101,7 @@
         {{ artist.name }}
       </li>
     </ul>
-      
+
     <ul *ngSwitchDefault></ul>
   </div>
   </div>

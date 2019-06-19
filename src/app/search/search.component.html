@@ -9,37 +9,37 @@
       <label class="btn btn-secondary"
           [ngClass]="{'active btn-success' : searchType === 'track'}"
           (click)="selectSearchType('track')">
-        <input type="radio" 
-            name="searchType" 
-            id="track" 
-            autocomplete="off"> 
+        <input type="radio"
+            name="searchType"
+            id="track"
+            autocomplete="off">
           Song
       </label>
       <label class="btn btn-secondary"
           [ngClass]="{'active btn-success' : searchType === 'artist'}"
           (click)="selectSearchType('artist')">
-        <input type="radio" 
-            name="searchType" 
-            id="artist" 
-            autocomplete="off"> 
+        <input type="radio"
+            name="searchType"
+            id="artist"
+            autocomplete="off">
           Artist
       </label>
       <label class="btn btn-secondary"
           [ngClass]="{'active btn-success' : searchType === 'album'}"
           (click)="selectSearchType('album')">
-        <input type="radio" 
-            name="searchType" 
-            id="album" 
-            autocomplete="off"> 
+        <input type="radio"
+            name="searchType"
+            id="album"
+            autocomplete="off">
           Album
       </label>
       <label class="btn btn-secondary"
           [ngClass]="{'active btn-success' : searchType === 'playlist'}"
           (click)="selectSearchType('playlist')">
-        <input type="radio" 
-            name="searchType" 
-            id="playlist" 
-            autocomplete="off"> 
+        <input type="radio"
+            name="searchType"
+            id="playlist"
+            autocomplete="off">
           Playlist
       </label>
     </div>
@@ -47,10 +47,10 @@
 
   <div class="col-12 mt-3">
     <div class="row">
-      <input 
-          class="form-control col-10"  
-          placeholder="Search" 
-          aria-label="Search" 
+      <input
+          class="form-control col-10"
+          placeholder="Search"
+          aria-label="Search"
           (keyup)="updateSearchContent($event)">
       <button class="btn btn-success col-2"(click)="search()">Search</button>
     </div>
@@ -61,10 +61,62 @@
     <p *ngIf="searchResults.length == 0 && searchPerformed">No Results</p>
     <div class="mt-2">
       <ul class="list-group">
-        <li *ngFor="let result of searchResults" class="list-group-item">
+        <li *ngFor="let result of searchResults" class="list-group-item"
+            data-toggle="modal" attr.data-target='#modal-basic-title-{{renderedSearchType}}' (click)=selectSearchById(result.id,content)>
           {{ result.name }}
         </li>
       </ul>
     </div>
   </div>
+
+
+  <div [ngSwitch]="renderedSearchType">
+    <ng-template #content let-modal id="modal-basic-title-playlist" >
+      <div class="modal-header" *ngSwitchCase="'playlist'">
+        <h4 class="modal-title" >{{ selectedPlaylist.name }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-header" *ngSwitchCase="'artist'">
+        <h4 class="modal-title" >{{ selectedArtist.name }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-header" *ngSwitchCase="'track'">
+        <h4 class="modal-title" >{{ selectedSong.name }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-header" *ngSwitchCase="'album'">
+        <h4 class="modal-title">{{selectedAlbum.name}}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngSwitchCase="'playlist'">
+        <img class="col-12" src={{selectedPlaylist.images[0].url}}/>
+        <p class="col-12">Description: {{selectedPlaylist.description}}</p>
+        <a class="col-12" href="#">Show Playlist Info</a>
+      </div>
+      <div class="modal-body" *ngSwitchCase="'artist'">
+        <img class="col-12" src={{selectedArtist.images[0].url}}/>
+        <p class="col-12">Genres: {{selectedArtist.genres}}</p>
+        <a class="col-12" href="#">Show Artist Info</a>
+      </div>
+      <div class="modal-body" *ngSwitchCase="'track'">
+        <img class="col-12" src={{selectedSong.album.images[0].url}}/>
+        <a class="col-12" href={{selectedSong.preview_url}}>Preview Link</a>
+        <a class="col-12" href="#">Show Track Info</a>
+      </div>
+      <div class="modal-body" *ngSwitchCase="'album'">
+        <img class="col-12" src={{selectedAlbum.images[0].url}}/>
+        <p class="col-12">Artist: {{selectedAlbum.artists[0].name}}</p>
+        <a class="col-12" href="#">Show Album Info</a>
+      </div>
+    </ng-template>
+  </div>
+
 </div>

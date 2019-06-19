@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyServiceClient } from '../services/spotify-service-client';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-search',
@@ -8,14 +9,82 @@ import { SpotifyServiceClient } from '../services/spotify-service-client';
 })
 export class SearchComponent implements OnInit {
   searchType = 'track';
+  renderedSearchType = '';
   searchContent = '';
   searchResults = [];
   searchTitle = '';
   searchPerformed = false;
+  selectedSong = {};
+  selectedArtist = {};
+  selectedPlaylist = {};
+  selectedAlbum = {};
 
-  constructor(private spotifyService: SpotifyServiceClient) { }
+  constructor(
+    private spotifyService: SpotifyServiceClient,
+    private modalService: NgbModal) { }
+
 
   ngOnInit() {
+  }
+
+  selectSearchById = (id, content) => {
+    switch (this.renderedSearchType) {
+      case 'track':
+        return this.selectTrackById(id, content);
+      case 'artist':
+        return this.selectArtistById(id, content);
+      case 'album':
+        return this.selectAlbumById(id, content);
+      case 'playlist':
+        return this.selectPlaylistById(id, content);
+    }
+  }
+
+  selectPlaylistById = (id, content) => {
+    this.spotifyService
+      .getPlaylistById(id)
+      .then(res => {
+        this.selectedPlaylist = res;
+      })
+    this.openContent(content);
+  }
+
+
+  selectAlbumById = (id, content) => {
+    this.spotifyService
+      .getAlbumById(id)
+      .then(res => {
+        this.selectedAlbum = res;
+      })
+    this.openContent(content);
+  }
+
+
+  selectArtistById = (id, content) => {
+    this.spotifyService
+      .getArtistById(id)
+      .then(res => {
+        this.selectedArtist = res;
+      })
+    this.openContent(content);
+  }
+
+  selectTrackById = (id, content) => {
+    this.spotifyService
+      .getTrackById(id)
+      .then(response => {
+        this.selectedSong = response;
+        console.log(response)
+      })
+
+    this.openContent(content);
+  }
+
+
+  openContent = (content) => {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    }, (reason) => {
+    });
   }
 
   selectSearchType = searchType => {
@@ -38,6 +107,7 @@ export class SearchComponent implements OnInit {
 
   search = () => {
     if (this.searchContent !== '') {
+      this.renderedSearchType = this.searchType;
       let content = this.urlifyContent();
       let type = this.searchType;
       this.searchPerformed = true;
