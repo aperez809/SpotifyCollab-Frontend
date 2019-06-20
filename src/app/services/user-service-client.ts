@@ -40,6 +40,7 @@ export class UserService {
     ];
 
     findUserByCredentials(un: String, pw: String) {
+    
       return fetch("https://song-request-server-node.herokuapp.com/api/users/login", {
         credentials: 'include',
         method: 'POST',
@@ -48,35 +49,41 @@ export class UserService {
           password: pw
         }),
         headers: {
-            "content-type": "application/json"
+            'content-type': 'application/json'
         }
       })
         .then(user => {
-          if (user) {
-            const assignedSessionId = user["_id"];
-            const requestSessionUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value".replace(':name', "sessionId").replace(':value', assignedSessionId)
-            return fetch(requestSessionUrl, {
-              credentials: 'include',
-              method: "POST",
-              headers: {
-                "content-type": "application/json"
-              }
-            })
-            .then(res => {return res.json()});
-          }
-          else {
-            //Show error message stating that login credentials were incorrect
-          }
+          return user.json();
         });
-      /*
-        for (let i = 0; i < this.users.length; i++) {
-          const user = this.users[i];
-          if (username === user.username &&
-            password === user.password) {
-            return user;
+      
+        
+    
+      //return this.assignSessionToUser(fulfilledPromise);
+
+      }
+          
+      assignSessionToUser(un, pw) { 
+        this.findUserByCredentials(un, pw). then(user => {
+        console.log(user);
+        if (user) {
+        const assignedSessionId = user["_id"];
+        const requestSessionUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value".replace(":name", "sessionId").replace(":value", assignedSessionId)
+        console.log(requestSessionUrl);
+        return fetch(requestSessionUrl, {
+          credentials: 'include',
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
           }
-        }
-        */
+        })
+        .then(res => {
+          return res.json()
+        });
+      }
+
+      else {
+      }
+      })
     }
 
     findUserById(userId) {
