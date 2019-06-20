@@ -73,9 +73,13 @@
   <div [ngSwitch]="renderedSearchType">
     <ng-template #content let-modal id="modal-basic-title-playlist" >
       <div class="modal-header" *ngSwitchCase="'playlist'">
-        <h4 class="modal-title" >{{ selectedPlaylist.name }}</h4>
+        <span routerLink="/playlist/{{selectedPlaylist.id}}">
+          <h4 class="modal-title" >{{ selectedPlaylist.name }}</h4>
+        </span>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">
+            <i class="fas fa-times text-danger"></i>
+          </span>
         </button>
       </div>
       <div class="modal-header" *ngSwitchCase="'artist'">
@@ -98,26 +102,50 @@
       </div>
       <div class="modal-body" *ngSwitchCase="'playlist'">
         <img class="col-12" src={{selectedPlaylist.images[0].url}}/>
-        <p class="col-12">Description: {{selectedPlaylist.description}}</p>
-        <a class="col-12" href="#" routerLink="/playlist/{{selectedPlaylist.id}}"
-           aria-label="Close" (click)="modal.dismiss('Cross click')">Show Playlist Info</a>
+        <a role="button" 
+          class="btn btn-dark" 
+          href={{selectedPlaylist.external_urls.spotify}}>
+          Open in Spotify
+        </a>
+        <button type="button" 
+          class="btn btn-success" 
+          routerLink="/playlist/{{selectedPlaylist.id}}"
+          (click)="modal.dismiss('Cross click')">
+          See more...
+        </button>
       </div>
       <div class="modal-body" *ngSwitchCase="'artist'">
         <img class="col-12" src={{selectedArtist.images[0].url}}/>
-        <a class="col-12" href="#" routerLink="/artist/{{selectedArtist.id}}"
-           aria-label="Close" (click)="modal.dismiss('Cross click')">Show Artist Info</a>
+        <button type="button" 
+          class="btn btn-success" 
+          routerLink="/artist/{{selectedArtist.id}}"
+          (click)="modal.dismiss('Cross click')">
+          See more...
+        </button>
       </div>
       <div class="modal-body" *ngSwitchCase="'track'">
         <img class="col-12" src={{selectedSong.album.images[0].url}}/>
-        <a class="col-12" href={{selectedSong.preview_url}}>Preview Link</a>
-        <a class="col-12" href="#" routerLink="/track/{{selectedSong.id}}"
-           aria-label="Close" (click)="modal.dismiss('Cross click')">Show Track Info</a>
+        <a role="button" 
+          class="btn btn-secondary" 
+          href={{selectedSong.preview_url}}>
+          Preview Track
+        </a>
+        <button type="button" 
+          class="btn btn-success" 
+          routerLink="/track/{{selectedSong.id}}"
+          (click)="modal.dismiss('Cross click')">
+          See more...
+        </button>
       </div>
       <div class="modal-body" *ngSwitchCase="'album'">
         <img class="col-12" src={{selectedAlbum.images[0].url}}/>
         <p class="col-12">Artist: {{selectedAlbum.artists[0].name}}</p>
-        <a class="col-12" href="#" routerLink="/album/{{selectedAlbum.id}}"
-           aria-label="Close" (click)="modal.dismiss('Cross click')">Show Album Info</a>
+        <button type="button" 
+          class="btn btn-success" 
+          routerLink="/album/{{selectedAlbum.id}}"
+          (click)="modal.dismiss('Cross click')">
+          See more...
+        </button>
       </div>
     </ng-template>
   </div>
