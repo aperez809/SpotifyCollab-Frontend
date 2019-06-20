@@ -83,26 +83,27 @@
       <div class="modal-header" *ngSwitchCase="'artist'">
         <h4 class="modal-title" >{{ selectedArtist.name }}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">
+            <i class="fas fa-times text-danger"></i>
+          </span>
         </button>
       </div>
       <div class="modal-header" *ngSwitchCase="'track'">
         <h4 class="modal-title" >{{ selectedSong.name }}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">
+            <i class="fas fa-times text-danger"></i>
+          </span>
         </button>
       </div>
       <div class="modal-header" *ngSwitchCase="'album'">
         <h4 class="modal-title">{{selectedAlbum.name}}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">
+            <i class="fas fa-times text-danger"></i>
+          </span>
         </button>
       </div>
-
-
-
-
-
 
       <div class="modal-body" *ngSwitchCase="'playlist'">
         <span 
@@ -121,54 +122,129 @@
               </button>
             </div>
             <div class="ml-auto">
-              <i class="fas fa-plus-circle text-success fa-3x text-right"></i>
+              <i class="fas fa-plus-circle text-success fa-3x text-right"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Add to Queue"></i>
             </div>
           </div>
           <div class="row col-12 mt-3 ml-1">
             <a role="button" 
               class="btn btn-dark" 
-              href={{selectedPlaylist.external_urls.spotify}}>
+              href={{selectedPlaylist.external_urls.spotify}}
+              target="_blank">
               Open in Spotify
             </a>
           </div>
         </div>
       </div>
-
-
       <div class="modal-body" *ngSwitchCase="'artist'">
-        <img class="col-12" src={{selectedArtist.images[0].url}}/>
-        <button type="button" 
-          class="btn btn-success" 
+        <span 
           routerLink="/artist/{{selectedArtist.id}}"
           (click)="modal.dismiss('Cross click')">
-          See more...
-        </button>
+          <img class="col-12" src={{selectedArtist.images[0].url}}/>
+        </span>
+        <div class="row mt-4">
+          <div class="row col-12 ml-1">
+            <div class="">
+              <button type="button" 
+                class="btn btn-primary btn-lg" 
+                routerLink="/artist/{{selectedArtist.id}}"
+                (click)="modal.dismiss('Cross click')">
+                See more...
+              </button>
+            </div>
+            <div class="ml-auto">
+              <i class="fas fa-plus-circle text-success fa-3x text-right"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Add to Queue"></i>
+            </div>
+          </div>
+          <div class="row col-12 mt-3 ml-1">
+            <a role="button" 
+              class="btn btn-dark" 
+              href={{selectedArtist.external_urls.spotify}}
+              target="_blank">
+              Open in Spotify
+            </a>
+          </div>
+        </div>
       </div>
       <div class="modal-body" *ngSwitchCase="'track'">
-        <img class="col-12" src={{selectedSong.album.images[0].url}}/>
-        <a role="button" 
-          class="btn btn-secondary" 
-          href={{selectedSong.preview_url}}>
-          Preview Track
-        </a>
-        <button type="button" 
-          class="btn btn-success" 
+        <span 
           routerLink="/track/{{selectedSong.id}}"
           (click)="modal.dismiss('Cross click')">
-          See more...
-        </button>
+          <img class="col-12" src={{selectedSong.album.images[0].url}}/>
+        </span>
+        <div class="row mt-4">
+          <div class="row col-12 ml-1">
+            <div class="">
+              <button type="button" 
+                class="btn btn-primary btn-lg" 
+                routerLink="/track/{{selectedSong.id}}"
+                (click)="modal.dismiss('Cross click')">
+                See more...
+              </button>
+            </div>
+            <div class="ml-auto">
+              <i class="fas fa-plus-circle text-success fa-3x text-right"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Add to Queue"></i>
+            </div>
+          </div>
+          <div class="row col-12 mt-3 ml-1">
+            <a role="button" 
+              class="btn btn-dark" 
+              href={{selectedSong.external_urls.spotify}}
+              target="_blank">
+              Open in Spotify
+            </a>
+            <a role="button"
+              href={{selectedSong.preview_url}}
+              target="_blank">
+              <i class="fas fa-play-circle text-secondary fa-2x ml-3 mt-1"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Listen to Preview"></i>
+            </a>
+          </div>
+        </div>
       </div>
       <div class="modal-body" *ngSwitchCase="'album'">
-        <img class="col-12" src={{selectedAlbum.images[0].url}}/>
-        <p class="col-12">Artist: {{selectedAlbum.artists[0].name}}</p>
-        <button type="button" 
-          class="btn btn-success" 
+        <span 
           routerLink="/album/{{selectedAlbum.id}}"
           (click)="modal.dismiss('Cross click')">
-          See more...
-        </button>
+          <img class="col-12" src={{selectedAlbum.images[0].url}}/>
+        </span>
+        <div class="row mt-4">
+          <div class="row col-12 ml-1">
+            <div class="">
+              <button type="button" 
+                class="btn btn-primary btn-lg" 
+                routerLink="/album/{{selectedAlbum.id}}"
+                (click)="modal.dismiss('Cross click')">
+                See more...
+              </button>
+            </div>
+            <div class="ml-auto">
+              <i class="fas fa-plus-circle text-success fa-3x text-right"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Add to Queue"></i>
+            </div>
+          </div>
+          <div class="row col-12 mt-3 ml-1">
+            <a role="button" 
+              class="btn btn-dark" 
+              href={{selectedAlbum.external_urls.spotify}}
+              target="_blank">
+              Open in Spotify
+            </a>
+          </div>
+        </div>
       </div>
     </ng-template>
   </div>
-
 </div>
