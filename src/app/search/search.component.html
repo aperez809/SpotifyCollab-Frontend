@@ -73,9 +73,7 @@
   <div [ngSwitch]="renderedSearchType">
     <ng-template #content let-modal id="modal-basic-title-playlist" >
       <div class="modal-header" *ngSwitchCase="'playlist'">
-        <span routerLink="/playlist/{{selectedPlaylist.id}}">
-          <h4 class="modal-title" >{{ selectedPlaylist.name }}</h4>
-        </span>
+        <h4 class="modal-title" >{{ selectedPlaylist.name }}</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
           <span aria-hidden="true">
             <i class="fas fa-times text-danger"></i>
@@ -100,20 +98,43 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+
+
+
+
+
       <div class="modal-body" *ngSwitchCase="'playlist'">
-        <img class="col-12" src={{selectedPlaylist.images[0].url}}/>
-        <a role="button" 
-          class="btn btn-dark" 
-          href={{selectedPlaylist.external_urls.spotify}}>
-          Open in Spotify
-        </a>
-        <button type="button" 
-          class="btn btn-success" 
+        <span 
           routerLink="/playlist/{{selectedPlaylist.id}}"
           (click)="modal.dismiss('Cross click')">
-          See more...
-        </button>
+          <img class="col-12" src={{selectedPlaylist.images[0].url}}/>
+        </span>
+        <div class="row mt-4">
+          <div class="row col-12 ml-1">
+            <div class="">
+              <button type="button" 
+                class="btn btn-primary btn-lg" 
+                routerLink="/playlist/{{selectedPlaylist.id}}"
+                (click)="modal.dismiss('Cross click')">
+                See more...
+              </button>
+            </div>
+            <div class="ml-auto">
+              <i class="fas fa-plus-circle text-success fa-3x text-right"></i>
+            </div>
+          </div>
+          <div class="row col-12 mt-3 ml-1">
+            <a role="button" 
+              class="btn btn-dark" 
+              href={{selectedPlaylist.external_urls.spotify}}>
+              Open in Spotify
+            </a>
+          </div>
+        </div>
       </div>
+
+
       <div class="modal-body" *ngSwitchCase="'artist'">
         <img class="col-12" src={{selectedArtist.images[0].url}}/>
         <button type="button" 
