@@ -36,6 +36,22 @@ export class UserService {
       //return this.assignSessionToUser(fulfilledPromise);
 
       }
+
+      async findUserById(id: String) {
+        return await fetch("https://song-request-server-node.herokuapp.com/api/users/" + id, {
+          method: 'GET',
+          headers: {
+              'content-type': 'application/json'
+          }
+        })
+          .then(user => {
+            return user.json();
+          })
+          .then(userData => {
+            console.log(userData);
+            return userData
+          });
+      }
           
       assignSessionToUser(user) { 
         const assignedSessionId = user["_id"];

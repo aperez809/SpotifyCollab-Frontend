@@ -45,7 +45,11 @@ export class ProfileComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       params => {
         this.userId = params['userId'];
-        this.user = this.userService.findUserById(this.userId);
+        this.userService.findUserById(this.userId)
+                      .then(res => {
+                        console.log(res);
+                        return this.user = res;
+                      });
       });
   }
 
