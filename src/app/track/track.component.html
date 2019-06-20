@@ -1,8 +1,15 @@
 <div class="container">
   <div class="col-12">
     <h1>{{track.name}}</h1>
-    <p>{{track.album.name}}</p>
+    <h4 href="#" routerLink="/artist/{{track.artists[0].id}}">{{track.artists[0].name}}</h4>
+    <a href="#" routerLink="/album/{{track.album.id}}">{{track.album.name}}</a>
     <img src="{{track.album.images[0].url}}"/>
+
+    <p>Duration (in ms): {{track.duration_ms}}</p>
+    <p>Explicit: {{track.explicit}}</p>
+    <p>Popularity Score: {{track.popularity}}</p>
+    <a href="{{track.preview_url}}">Preview Link</a>
+
   </div>
 </div>
 
