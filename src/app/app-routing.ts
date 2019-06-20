@@ -9,6 +9,7 @@ import {TrackComponent} from './track/track.component';
 import {ArtistComponent} from './artist/artist.component';
 import {PlaylistComponent} from './playlist/playlist.component';
 import {AlbumComponent} from './album/album.component';
+import { PartyComponent } from './party/party.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
   { path: 'track/:trackId', component: TrackComponent},
   { path: 'artist/:artistId', component: ArtistComponent},
   { path: 'album/:albumId', component: AlbumComponent},
-  { path: 'playlist/:playlistId', component: PlaylistComponent}
+  { path: 'playlist/:playlistId', component: PlaylistComponent},
+  { path: 'party/:partyId', component: PartyComponent}
 
 ];
 
