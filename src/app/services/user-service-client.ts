@@ -4,40 +4,12 @@ import { Injectable } from '@angular/core';
 export class UserService { 
     private requestBaseUrl: string;
     private sessionBaseUrl: string;
+    
 
     constructor() {
       this.requestBaseUrl = "https://song-request-server-node.herokuapp.com/api/users/login";
       this.sessionBaseUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value";
     }
-
-    users = [
-        {
-            id: 123,
-            username: 'username',
-            password:'password',
-            firstname: 'First',
-            lastname: 'Last',
-            dob: '',
-            profilePicturePath: 'assets/images/vinyl-background.png',
-            spotifyUser: false,
-            spotifyUsername: '',
-            spotifyUrl: '',
-            loggedIn: false
-        },
-        {
-            id: 456,
-            username: 'welchdaniel',
-            password:'password',
-            firstname: 'Dan',
-            lastname: 'Welch',
-            dob: '',
-            profilePicturePath: 'assets/images/vinyl-background.png',
-            spotifyUser: true,
-            spotifyUsername: 'dwelch',
-            spotifyUrl: '',
-            loggedIn: false
-        }
-    ];
 
     findUserByCredentials(un: String, pw: String) {
     
@@ -77,24 +49,17 @@ export class UserService {
           }
         })
         .then(res => {
-          return res.json()
+          try {
+            return res.json()
+          }
+          catch(error) {
+            
+          }
         });
       }
 
       else {
       }
       })
-    }
-
-    findUserById(userId) {
-        for (let i = 0; i < this.users.length; i++) {
-          const user = this.users[i];
-          if (userId == user.id) {
-            return user;
-          }
-        }
-    }
-       
-       
-     
+    }     
 }
