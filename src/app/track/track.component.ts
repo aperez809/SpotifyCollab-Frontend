@@ -22,8 +22,7 @@ export class TrackComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       params => {
         this.trackId = params['trackId'];
-        this.track = this.spotifyService.getTrackById(this.trackId);
-        console.log(this.track);
+        this.spotifyService.getTrackById(this.trackId).then(res => this.track = res);
       });
 
   }

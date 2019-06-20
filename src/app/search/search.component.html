@@ -104,7 +104,6 @@
       </div>
       <div class="modal-body" *ngSwitchCase="'artist'">
         <img class="col-12" src={{selectedArtist.images[0].url}}/>
-        <p class="col-12">Genres: {{selectedArtist.genres}}</p>
         <a class="col-12" href="#" routerLink="/artist/{{selectedArtist.id}}"
            aria-label="Close" (click)="modal.dismiss('Cross click')">Show Artist Info</a>
       </div>

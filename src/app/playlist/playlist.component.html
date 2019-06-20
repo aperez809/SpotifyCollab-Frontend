@@ -1,3 +1,8 @@
-<p>
-  playlist works!
-</p>
+<div class="container">
+  <div class="col-12">
+    <h1>{{playlist.name}}</h1>
+    <p>Owner: {{playlist.owner.display_name}}</p>
+    <img src="{{playlist.images[0].url}}"/>
+    <p>Description: {{playlist.description}}</p>
+  </div>
+</div>
