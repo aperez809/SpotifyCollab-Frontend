@@ -99,22 +99,26 @@
       <div class="modal-body" *ngSwitchCase="'playlist'">
         <img class="col-12" src={{selectedPlaylist.images[0].url}}/>
         <p class="col-12">Description: {{selectedPlaylist.description}}</p>
-        <a class="col-12" href="#">Show Playlist Info</a>
+        <a class="col-12" href="#" routerLink="/playlist/{{selectedPlaylist.id}}"
+           aria-label="Close" (click)="modal.dismiss('Cross click')">Show Playlist Info</a>
       </div>
       <div class="modal-body" *ngSwitchCase="'artist'">
         <img class="col-12" src={{selectedArtist.images[0].url}}/>
         <p class="col-12">Genres: {{selectedArtist.genres}}</p>
-        <a class="col-12" href="#">Show Artist Info</a>
+        <a class="col-12" href="#" routerLink="/artist/{{selectedArtist.id}}"
+           aria-label="Close" (click)="modal.dismiss('Cross click')">Show Artist Info</a>
       </div>
       <div class="modal-body" *ngSwitchCase="'track'">
         <img class="col-12" src={{selectedSong.album.images[0].url}}/>
         <a class="col-12" href={{selectedSong.preview_url}}>Preview Link</a>
-        <a class="col-12" href="#">Show Track Info</a>
+        <a class="col-12" href="#" routerLink="/track/{{selectedSong.id}}"
+           aria-label="Close" (click)="modal.dismiss('Cross click')">Show Track Info</a>
       </div>
       <div class="modal-body" *ngSwitchCase="'album'">
         <img class="col-12" src={{selectedAlbum.images[0].url}}/>
         <p class="col-12">Artist: {{selectedAlbum.artists[0].name}}</p>
-        <a class="col-12" href="#">Show Album Info</a>
+        <a class="col-12" href="#" routerLink="/album/{{selectedAlbum.id}}"
+           aria-label="Close" (click)="modal.dismiss('Cross click')">Show Album Info</a>
       </div>
     </ng-template>
   </div>

@@ -13,6 +13,10 @@ import { SearchComponent } from './search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { TrackComponent } from './track/track.component';
+import { ArtistComponent } from './artist/artist.component';
+import { PlaylistComponent } from './playlist/playlist.component';
+import { AlbumComponent } from './album/album.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import { RegisterComponent } from './register/register.component';
     ProfileComponent,
     SearchComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    TrackComponent,
+    ArtistComponent,
+    PlaylistComponent,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,
