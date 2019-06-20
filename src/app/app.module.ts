@@ -17,6 +17,8 @@ import { TrackComponent } from './track/track.component';
 import { ArtistComponent } from './artist/artist.component';
 import { PlaylistComponent } from './playlist/playlist.component';
 import { AlbumComponent } from './album/album.component';
+import { HomePageComponent } from './homepage/homepage.component';
+import { PartyComponent } from './party/party.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AlbumComponent } from './album/album.component';
     TrackComponent,
     ArtistComponent,
     PlaylistComponent,
-    AlbumComponent
+    AlbumComponent,
+    HomePageComponent,
+    PartyComponent
   ],
   imports: [
     BrowserModule,
