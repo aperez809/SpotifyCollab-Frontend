@@ -80,7 +80,7 @@
     <div class="mt-2" [ngSwitch]="selectedTab">
       <ul class="list-group" *ngSwitchCase="'playlist'">
         <li *ngFor="let playlist of playlists" class="list-group-item" (click)=selectPlaylist(playlist.id,content)>
-          <a>{{ playlist.name }}</a>
+          <a routerLink="/playlist/{{playlist.id}}">{{ playlist.name }}</a>
           <div *ngIf="playlist.id == selectedID">
             <img src={{playlist.images[0].url}} />
           </div>
@@ -88,17 +88,17 @@
       </ul>
       <ul class="list-group" *ngSwitchCase="'library'">
         <li *ngFor="let track of tracks" class="list-group-item">
-          {{ track.track.name }}
+          <a href="#" routerLink="/track/{{track.track.id}}">{{ track.track.name }}</a>
         </li>
       </ul>
       <ul class="list-group" *ngSwitchCase="'recent'">
         <li *ngFor="let recentTrack of recent" class="list-group-item">
-          {{ recentTrack.track.name }}
+          <a href="#" routerLink="/track/{{recentTrack.track.id}}">{{ recentTrack.track.name }}</a>
         </li>
       </ul>
       <ul class="list-group" *ngSwitchCase="'following'">
         <li *ngFor="let artist of following" class="list-group-item">
-          {{ artist.name }}
+          <a href="#" routerLink="/artist/{{artist.id}}">{{ artist.name }}</a>
         </li>
       </ul>
 

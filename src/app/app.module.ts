@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
 import { routing } from './app-routing';
 
 import { SpotifyServiceClient } from './services/spotify-service-client';
@@ -37,6 +39,7 @@ import { PartyComponent } from './party/party.component';
   imports: [
     BrowserModule,
     FormsModule,
+    AngularFontAwesomeModule,
     routing,
     NgbModule
   ],
