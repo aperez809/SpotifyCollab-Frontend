@@ -3,9 +3,11 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class UserService { 
     private requestBaseUrl: string;
+    private sessionBaseUrl: string;
 
     constructor() {
-      this.requestBaseUrl = "http://localhost:3001/api/users";
+      this.requestBaseUrl = "https://song-request-server-node.herokuapp.com/api/users/login";
+      this.sessionBaseUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value";
     }
 
     users = [
@@ -37,7 +39,36 @@ export class UserService {
         }
     ];
 
-    findUserByCredentials(username: String, password: String) {
+    findUserByCredentials(un: String, pw: String) {
+      return fetch("https://song-request-server-node.herokuapp.com/api/users/login", {
+        credentials: 'include',
+        method: 'POST',
+        body: JSON.stringify({
+          username: un,
+          password: pw
+        }),
+        headers: {
+            "content-type": "application/json"
+        }
+      })
+        .then(user => {
+          if (user) {
+            const assignedSessionId = user["_id"];
+            const requestSessionUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value".replace(':name', "sessionId").replace(':value', assignedSessionId)
+            return fetch(requestSessionUrl, {
+              credentials: 'include',
+              method: "POST",
+              headers: {
+                "content-type": "application/json"
+              }
+            })
+            .then(res => {return res.json()});
+          }
+          else {
+            //Show error message stating that login credentials were incorrect
+          }
+        });
+      /*
         for (let i = 0; i < this.users.length; i++) {
           const user = this.users[i];
           if (username === user.username &&
@@ -45,6 +76,7 @@ export class UserService {
             return user;
           }
         }
+        */
     }
 
     findUserById(userId) {

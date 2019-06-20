@@ -16,9 +16,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   login() {
+    console.log(this.username);
+    console.log(this.password);
     const user = this.userService.findUserByCredentials(this.username, this.password);
     if (user != null) {
-      this.router.navigate(['profile', user.id]);
+      this.router.navigate(['profile', user["_id"]]);
     }
   }
 
