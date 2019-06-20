@@ -1,4 +1,6 @@
 <h1>Login</h1>
+
+<h3 *ngIf="loginFailed" style="color:red">Incorrect username or password, please try again</h3>
 Username
 <input [(ngModel)]="username"/>
 Password
