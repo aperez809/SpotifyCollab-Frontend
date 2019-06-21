@@ -1,3 +1,15 @@
-<p>
-  register works!
-</p>
+<div>
+  <h3 *ngIf="registerFailed" style="color:red">Username Already Taken, Try Again!</h3>
+  <h1>Register New User</h1>
+  Username:
+  <input [(ngModel)]="username"/>
+  Password:
+  <input [(ngModel)]="password"/>
+  First Name:
+  <input [(ngModel)]="firstName"/>
+  Last Name:
+  <input [(ngModel)]="lastName"/>
+  <button (click)="register()">
+    Register
+  </button>
+</div>
