@@ -98,9 +98,21 @@ export class UserService {
           });
       }
     
+    getSession() {
+      const getSessionUrl = "https://song-request-server-node.herokuapp.com/api/session/get";
+      return fetch(getSessionUrl, {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+    }
+
     logUserOut() {
       const logoutUrl = "https://song-request-server-node.herokuapp.com/api/session/reset";
       return fetch(logoutUrl, {
+        credentials: 'include',
         method: 'GET',
         headers: {
           'content-type': 'application/json'
