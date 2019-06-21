@@ -17,18 +17,18 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   login() {
-    //const userId = this.userService.findUserByCredentials(this.username, this.password);   
-    this.userService.findUserByCredentials(this.username, this.password)
-      .then(user => {
-        if (user) {
-          this.userService.assignSessionToUser(user);
-          this.router.navigate(['profile']); 
-        }
-      }); 
-    /*if (userId) {
-      this.router.navigate(['profile', userId]);
-    }
-  }*/
+    this.failedLogin = false;
+      this.userService.findUserByCredentials(this.username, this.password)
+        .then(user => {
+          if (user) {
+            this.userService.assignSessionToUser(user);
+            this.router.navigate(['profile']);
+          }
+        }).catch((err: Error) => {
+        console.log(err)
+        this.failedLogin = true;
+      });
+
 }
 
 }
