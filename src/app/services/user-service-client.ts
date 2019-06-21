@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class UserService {
@@ -9,7 +10,7 @@ export class UserService {
     currentUserData;
     
 
-    constructor() {
+    constructor(private cookieService: CookieService) {
       this.requestBaseUrl = "https://song-request-server-node.herokuapp.com/api/users/login";
       this.sessionBaseUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value";
     }

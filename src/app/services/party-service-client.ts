@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class PartyService {
 
 
-  constructor() {  }
+  constructor(private cookieService: CookieService) {  }
 
 
   async findPartyById(partyId: String) {

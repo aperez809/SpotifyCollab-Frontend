@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SpotifyServiceClient} from "../services/spotify-service-client";
 import {ActivatedRoute} from "@angular/router";
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -14,7 +15,8 @@ export class PlaylistComponent implements OnInit {
   playlistId;
 
   constructor(private spotifyService: SpotifyServiceClient,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private cookieService: CookieService) {
   }
 
   ngOnInit() {

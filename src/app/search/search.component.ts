@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyServiceClient } from '../services/spotify-service-client';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-search',
@@ -21,7 +22,8 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private spotifyService: SpotifyServiceClient,
-    private modalService: NgbModal) { }
+    private modalService: NgbModal,
+    private cookieService: CookieService) { }
 
 
   ngOnInit() {

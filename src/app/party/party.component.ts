@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PartyService } from '../services/party-service-client'
 import { UserService } from '../services/user-service-client';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class PartyComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private partyService: PartyService,
-              private userService: UserService) { }
+              private userService: UserService,
+              private cookieService: CookieService) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(

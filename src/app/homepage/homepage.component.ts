@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-homepage',
@@ -9,7 +10,7 @@ export class HomePageComponent implements OnInit {
   availableParties = [];
   apiBaseUrl = "http://song-request-server-node.herokuapp.com/api/";
 
-  constructor() { }
+  constructor(private cookieService: CookieService) { }
   ngOnInit() {
     this.getPartyList()
       .then(res => {

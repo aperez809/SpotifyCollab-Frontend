@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class SpotifyServiceClient {
@@ -8,7 +9,7 @@ export class SpotifyServiceClient {
     private displayName: string;
     private userHref: string;
 
-    constructor() {
+    constructor(private cookieService: CookieService) {
         const params = this.getHashParams();
         this.token = params["access_token"];
         this.refreshToken = params["refresh_token"];
