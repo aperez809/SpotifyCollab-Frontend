@@ -99,8 +99,7 @@ export class UserService {
       }
     
     getSession() {
-      const getSessionUrl = "https://song-request-server-node.herokuapp.com/api/session/get";
-      return fetch(getSessionUrl, {
+      return fetch("https://song-request-server-node.herokuapp.com/api/session/get", {
         credentials: 'include',
         method: 'GET',
         headers: {
@@ -110,8 +109,7 @@ export class UserService {
     }
 
     logUserOut() {
-      const logoutUrl = "https://song-request-server-node.herokuapp.com/api/session/reset";
-      return fetch(logoutUrl, {
+      return fetch("https://song-request-server-node.herokuapp.com/api/session/reset", {
         credentials: 'include',
         method: 'GET',
         headers: {
