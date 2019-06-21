@@ -98,23 +98,19 @@ export class UserService {
           });
       }
     
-    getSession() {
-      return fetch("https://song-request-server-node.herokuapp.com/api/session/get", {
-        credentials: 'include',
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json'
-        }
-      })
-    }
 
     logUserOut() {
-      return fetch("https://song-request-server-node.herokuapp.com/api/session/reset", {
+      const logoutUrl = "https://song-request-server-node.herokuapp.com/api/session/reset";
+      return fetch(logoutUrl, {
         credentials: 'include',
+=======
+    getSession() { 
+      return fetch("https://song-request-server-node.herokuapp.com/api/session/get", {
         method: 'GET',
         headers: {
           'content-type': 'application/json'
         }
       })
     }
+}
 
