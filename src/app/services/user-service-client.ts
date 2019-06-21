@@ -55,7 +55,7 @@ export class UserService {
           
       assignSessionToUser(user) { 
         const assignedSessionId = user["_id"];
-        const requestSessionUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value".replace(":name", "sessionId").replace(":value", assignedSessionId);
+        const requestSessionUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value".replace(":name", user["username"]).replace(":value", assignedSessionId);
         return fetch(requestSessionUrl, {
           credentials: 'include',
           method: 'POST',
@@ -70,5 +70,15 @@ export class UserService {
         .then(resData => {
           return resData;
         });    
-    }     
+    }
+    
+    logUserOut() {
+      const logoutUrl = "https://song-request-server-node.herokuapp.com/api/session/reset";
+      return fetch(logoutUrl, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+    }
 }
