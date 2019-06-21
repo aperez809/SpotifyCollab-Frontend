@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.userService.createUser(this.username, this.password, this.firstName, this.lastName, null)
+    this.userService.createUser(this.username, this.password, this.firstName, this.lastName)
       .then(user => {
         return user.json();
       })
