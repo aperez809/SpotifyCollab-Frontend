@@ -1,15 +1,17 @@
-<div>
+<div className="container">
   <h3 *ngIf="registerFailed" style="color:red">Username Already Taken, Try Again!</h3>
   <h1>Register New User</h1>
+  <div>
   Username:
-  <input [(ngModel)]="username"/>
+  <input [(ngModel)]="username" type="text" placeholder="user123"/>
   Password:
-  <input [(ngModel)]="password"/>
+  <input [(ngModel)]="password" type="password" placeholder="********"/>
   First Name:
-  <input [(ngModel)]="firstName"/>
+  <input [(ngModel)]="firstName" type="text" placeholder="John"/>
   Last Name:
-  <input [(ngModel)]="lastName"/>
+  <input [(ngModel)]="lastName" type="text" placeholder="Doe"/>
   <button (click)="register()">
     Register
   </button>
+  </div>
 </div>
