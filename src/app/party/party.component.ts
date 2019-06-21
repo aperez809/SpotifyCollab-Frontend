@@ -35,12 +35,24 @@ export class PartyComponent implements OnInit {
   
 
   joinParty(partyId) {
-    this.userService.getCurrentUserId()
+    const currUser = this.cookieService.getAll();
+    if (currUser["currentPartyId"] != "undefined" || currUser["currentPartyId"] != undefined) {
+      this.partyService.removeAttendee(partyId, currUser["_id"])
+    }
+
+    this.userService.updateUser(currUser["_id"], partyId);
+    this.cookieService.set("currentPartyId", partyId);
+
+    this.partyService.addAttendee(partyId, currUser["_id"]);
+
+
+    
+    /*this.userService.getCurrentUserId()
       .then(userId => {
         this.partyService.removeAttendee(partyId, userId);
         this.userService.updateUser(userId, partyId);
         this.partyService.addAttendee(partyId, userId);
-      });
+      });*/
     }
   
   

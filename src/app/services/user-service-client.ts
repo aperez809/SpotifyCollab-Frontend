@@ -57,11 +57,11 @@ export class UserService {
           
       assignSessionToUser(user) { 
 
-        this.cookieService.set("userId", user["_id"]);
-        this.cookieService.set("username", user["username"])
-        this.cookieService.set("firstName", user["firstName"])
-        this.cookieService.set("lastName", user["lastName"])
-        this.cookieService.set("currentPartyId", user["currentPartyId"]);
+        this.cookieService.set("_id", user["_id"], null, "/");
+        this.cookieService.set("username", user["username"], null, "/")
+        this.cookieService.set("firstName", user["firstName"], null, "/")
+        this.cookieService.set("lastName", user["lastName"], null, "/")
+        this.cookieService.set("currentPartyId", user["currentPartyId"], null, "/");
 
         const assignedSessionId = user["_id"];
         const requestSessionUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value".replace(":name", user["username"]).replace(":value", assignedSessionId);

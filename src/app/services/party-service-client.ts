@@ -28,11 +28,8 @@ export class PartyService {
   }
 
   addAttendee(pid, uid) {
-    return fetch("http://song-request-server-node.herokuapp.com/api/parties/addUser/" + pid, {
+    return fetch("http://song-request-server-node.herokuapp.com/api/parties/" + pid + "/addUser/" + uid, {
       method: 'PUT',
-      body: JSON.stringify({
-        userId: uid
-      }),
       headers: {
         'content-type': 'application/json'
       }
