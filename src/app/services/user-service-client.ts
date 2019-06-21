@@ -105,7 +105,7 @@ export class UserService {
         headers: {
           'content-type': 'application/json'
         }
-      });
+      }).then(response => response.json());
     }
 
     getCurrentUserId() {
@@ -142,5 +142,19 @@ export class UserService {
         }
       })
         .then(response => {return response.json()})
+    }
+
+    updateUser(userId, partyId) {
+      const putUrl = "https://song-request-server-node.herokuapp.com/api/users/" + userId;
+      return fetch(putUrl, {
+        credentials: 'include',
+        method: 'PUT',
+        body: JSON.stringify({
+          currentPartyId: partyId
+        }),
+        headers: {
+          'content-type': 'application/json'
+        }
+      }).then(res => console.log(res.json()))
     }
 }
