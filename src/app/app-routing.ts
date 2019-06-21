@@ -15,6 +15,7 @@ const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
   { path: 'search', component: SearchComponent },
   { path: 'profile/:userId', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'track/:trackId', component: TrackComponent},

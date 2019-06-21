@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
       .then(user => {
         if (user) {
           this.userService.assignSessionToUser(user);
-          this.router.navigate(['profile', user["_id"]]);    
+          this.router.navigate(['profile']); 
         }
       }); 
     /*if (userId) {

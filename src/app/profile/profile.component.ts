@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   selectedPlaylist = {};
 
   userId: String;
+  myProfile: Boolean;
   user = {
     firstName : '',
     lastName : '',
@@ -46,12 +47,19 @@ export class ProfileComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       params => {
         this.userId = params['userId'];
-        this.userService.findUserById(this.userId)
-                      .then(res => {
-                        console.log(res);
-                        return this.user = res;
-                      });
       });
+      if(this.userId) {
+        this.myProfile = false;
+        this.userService.findUserById(this.userId)
+          .then(res => {
+            console.log(res);
+            return this.user = res;
+        });
+      }
+      else {
+        this.myProfile = true;
+
+      }
   }
 
   logout = () => {
@@ -74,9 +82,7 @@ export class ProfileComponent implements OnInit {
   }
 
   showContent = (id) => {
-    console.log("clicked: ", id);
     this.selectedID = id;
-    console.log("selected id: ", this.selectedID);
   }
 
   connectSpotify = () => {
@@ -85,6 +91,10 @@ export class ProfileComponent implements OnInit {
       .then(response => {
         this.spotifyUserName = response.display_name; 
         this.spotifyUserUrl = response.external_urls.spotify;
+      })
+      .then(() => {
+        this.userService.addSpotifyInformation(this.userId, this.spotifyUserName, this.spotifyUserUrl)
+          .then(status => {return status})
       })
   }
 

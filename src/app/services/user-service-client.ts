@@ -98,19 +98,39 @@ export class UserService {
           });
       }
     
-
-    logUserOut() {
-      const logoutUrl = "https://song-request-server-node.herokuapp.com/api/session/reset";
-      return fetch(logoutUrl, {
-        credentials: 'include',
-=======
-    getSession() { 
+    getSession() {
       return fetch("https://song-request-server-node.herokuapp.com/api/session/get", {
+        credentials: 'include',
         method: 'GET',
         headers: {
           'content-type': 'application/json'
         }
       })
     }
-}
 
+    logUserOut() {
+      return fetch("https://song-request-server-node.herokuapp.com/api/session/reset", {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+    }
+
+    addSpotifyInformation(userId, spotifyUsername, spotifyUrl) {
+      const addSpotifyUrl = "https://song-request-server-node.herokuapp.com/api/users/:userId".replace(":userId", userId);
+      return fetch(addSpotifyUrl, {
+        credentials: 'include',
+        method: 'PUT',
+        body: JSON.stringify({
+          "spotifyUser": true,
+          "spotifyUsername": spotifyUsername,
+          "spotifyUrl": spotifyUrl,
+        }),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+    }
+}
