@@ -73,16 +73,18 @@ export class UserService {
         });    
     }
 
-    createUser(username: String, password: String, firstName: String, lastName: String, dob: String) {
+    createUser(username: String, password: String, firstName: String, lastName: String) {
       const createUrl = "https://song-request-server-node.herokuapp.com/api/users";
       return fetch(createUrl, {
+        credentials: 'include',
         method: 'POST',
         body: JSON.stringify({
           username: username,
           password: password,
           firstName: firstName,
           lastName: lastName,
-          dob: dob
+          dob: null,
+          profilePicturePath: "assets/images/vinyl-background.png"
         }),
         headers: {
           'content-type': 'application/json'
@@ -93,7 +95,7 @@ export class UserService {
           })
         .then(resData => {
           return resData;
-          })
+          });
       }
     
     logUserOut() {

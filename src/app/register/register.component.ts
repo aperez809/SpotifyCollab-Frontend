@@ -24,9 +24,12 @@ export class RegisterComponent implements OnInit {
   register() {
     this.userService.createUser(this.username, this.password, this.firstName, this.lastName, null)
       .then(user => {
-        if (user) {
-          this.userService.assignSessionToUser(user);
-          this.router.navigate(['profile', user["_id"]]);
+        return user.json();
+      })
+      .then(userData => {
+        if (userData) {
+          this.userService.assignSessionToUser(userData);
+          this.router.navigate(['profile', userData["_id"]]);
         }
       });
   }
