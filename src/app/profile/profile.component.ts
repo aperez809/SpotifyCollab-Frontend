@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    //this.userService.getSession().then(response => {console.log(response)});
     this.activatedRoute.params.subscribe(
       params => {
         this.userId = params['userId'];
@@ -51,6 +52,10 @@ export class ProfileComponent implements OnInit {
                         return this.user = res;
                       });
       });
+  }
+
+  logout = () => {
+    this.userService.logUserOut().then(response => {console.log(response)});
   }
 
   openContent = (content) => {
