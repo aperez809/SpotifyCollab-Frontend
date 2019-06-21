@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 
 @Injectable()
-export class UserService { 
+export class UserService {
+
     private requestBaseUrl: string;
     private sessionBaseUrl: string;
     currentUserData;
@@ -71,6 +72,31 @@ export class UserService {
           return resData;
         });    
     }
+
+    createUser(username: String, password: String, firstName: String, lastName: String) {
+      const createUrl = "https://song-request-server-node.herokuapp.com/api/users";
+      return fetch(createUrl, {
+        credentials: 'include',
+        method: 'POST',
+        body: JSON.stringify({
+          username: username,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          dob: null,
+          profilePicturePath: "assets/images/vinyl-background.png"
+        }),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+        .then(res => {
+            return res;
+          })
+        .then(resData => {
+          return resData;
+          });
+      }
     
     logUserOut() {
       const logoutUrl = "https://song-request-server-node.herokuapp.com/api/session/reset";

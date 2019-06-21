@@ -111,30 +111,28 @@
           (click)="modal.dismiss('Cross click')">
           <img class="col-12" src={{selectedPlaylist.images[0].url}}/>
         </span>
-        <div class="row mt-4">
-          <div class="row col-12 ml-1">
-            <div class="">
-              <button type="button" 
-                class="btn btn-primary btn-lg" 
-                routerLink="/playlist/{{selectedPlaylist.id}}"
-                (click)="modal.dismiss('Cross click')">
-                See more...
-              </button>
-            </div>
-            <div class="ml-auto">
-              <i class="fas fa-plus-circle text-success fa-3x text-right"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Add to Queue"></i>
+        <div class="container">
+          <div class="row mt-4">
+            <div class="float-right">
+              <div class="">
+                <button type="button" 
+                  class="btn btn-primary btn-lg" 
+                  routerLink="/playlist/{{selectedPlaylist.id}}"
+                  (click)="modal.dismiss('Cross click')">
+                  See more...
+                </button>
+              </div>
             </div>
           </div>
-          <div class="row col-12 mt-3 ml-1">
-            <a role="button" 
-              class="btn btn-dark" 
-              href={{selectedPlaylist.external_urls.spotify}}
-              target="_blank">
-              Open in Spotify
-            </a>
+          <div class="row mt-3">
+            <div class="float-right">
+              <a role="button" 
+                class="btn btn-dark" 
+                href={{selectedPlaylist.external_urls.spotify}}
+                target="_blank">
+                Open in Spotify
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -153,12 +151,6 @@
                 (click)="modal.dismiss('Cross click')">
                 See more...
               </button>
-            </div>
-            <div class="ml-auto">
-              <i class="fas fa-plus-circle text-success fa-3x text-right"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Add to Queue"></i>
             </div>
           </div>
           <div class="row col-12 mt-3 ml-1">
@@ -227,12 +219,6 @@
                 (click)="modal.dismiss('Cross click')">
                 See more...
               </button>
-            </div>
-            <div class="ml-auto">
-              <i class="fas fa-plus-circle text-success fa-3x text-right"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Add to Queue"></i>
             </div>
           </div>
           <div class="row col-12 mt-3 ml-1">
