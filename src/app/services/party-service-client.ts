@@ -7,16 +7,12 @@ export class PartyService {
   constructor() {  }
 
 
-  async findPartyById(partyId: string) {
-    return fetch("http://song-request-server-node.herokuapp.com/api/parties/" + partyId, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json'
-      }
-    });
+  async findPartyById(partyId: String) {
+    let foundParty = await fetch("http://song-request-server-node.herokuapp.com/api/parties/" + partyId)
+    return await foundParty.json();
   }
 
-  removeAttendee(pid, uid) {
+  async removeAttendee(pid, uid) {
     return fetch("http://song-request-server-node.herokuapp.com/api/parties/removeUser/" + pid, {
       method: 'PUT',
       body: JSON.stringify({
@@ -25,7 +21,9 @@ export class PartyService {
       headers: {
         'content-type': 'application/json'
       }
-    });
+    })
+    .then(res => res.json())
+    .then(resData => resData);
   }
 
   addAttendee(pid, uid) {

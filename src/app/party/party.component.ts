@@ -11,8 +11,8 @@ import { UserService } from '../services/user-service-client';
 })
 export class PartyComponent implements OnInit {
 
-  party;
-  partyId;
+  private party: String;
+  private partyId: String;
 
   constructor(private activatedRoute: ActivatedRoute,
               private partyService: PartyService,
@@ -33,11 +33,19 @@ export class PartyComponent implements OnInit {
   
 
   joinParty(partyId) {
-    const userId = this.userService.getCurrentUserId();
+    this.userService.getCurrentUserId()
+      .then(userId => {
+        this.partyService.removeAttendee(partyId, userId);
+        this.userService.updateUser(userId, partyId);
+        this.partyService.addAttendee(partyId, userId);
+      });
+    }
+  
+  
+
+    /*const userId = this.userService.getCurrentUserId()
+      .then(res => res)
     this.partyService.removeAttendee(partyId, userId);
     this.userService.updateUser(userId, partyId);
-    this.partyService.addAttendee(partyId, userId);
-  }
-
-
+    this.partyService.addAttendee(partyId, userId);*/
 }

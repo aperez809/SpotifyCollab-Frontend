@@ -110,7 +110,7 @@ export class UserService {
 
     getCurrentUserId() {
       return this.getSession().then(sesh => {
-        const seshKey = Object.keys(sesh).filter(k => k != "cookie")[0]
+        const seshKey = Object.keys(sesh).filter(k => k != "cookie")[0];
         return sesh[seshKey];
       });
     }
