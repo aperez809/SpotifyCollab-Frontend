@@ -9,33 +9,32 @@ export class SpotifyServiceClient {
     private displayName: string;
     private userHref: string;
 
-    constructor(private cookieService: CookieService) {
-        const params = this.getHashParams();
-        this.token = params["access_token"];
-        this.refreshToken = params["refresh_token"];
-        this.requestBaseUrl = "https://api.spotify.com/v1";
-        console.log(params);
-        console.log(this.token);
-        console.log(this.refreshToken);
-    }
+    constructor(private cookieService: CookieService) {}
 
     loggedIn = () => {
-        console.log(this.token)
-        if (this.token == null) {
-            return false;
+        return this.cookieService.check("spotifyAccessToken")
+    }
+
+    setTokenCookies = () => {
+        const params = this.getHashParams();
+        console.log(params);
+        this.requestBaseUrl = "https://api.spotify.com/v1";
+        if (params["access_token"] && params["refresh_token"]) {
+            //(!(this.cookieService.get("spotifyAccessToken") && this.cookieService.get("spotifyRefreshToken"))) {
+            console.log("FIRUWFHEWUBWUFEWNFOQIHWFNE");
+            this.cookieService.set("spotifyAccessToken", params["access_token"]);
+            this.cookieService.set("spotifyRefreshToken", params["refresh_token"]);
         }
-        return true;
     }
 
     searchForItem = (searchContent, searchType) => {
         let requestUrl = this.requestBaseUrl + "/search?q="
         requestUrl = requestUrl + searchContent;
         requestUrl = requestUrl + "&type=" + searchType;
-        console.log(requestUrl);
         return fetch(requestUrl, {
             method: 'GET',
             headers: {
-                Authorization: 'Bearer ' + this.token
+                Authorization: 'Bearer ' + this.cookieService.get("spotifyAccessToken")
             }
         })
             .then(response => {return response.json()})
@@ -48,7 +47,7 @@ export class SpotifyServiceClient {
       return fetch(requestUrl, {
         method: 'GET',
         headers: {
-          Authorization: 'Bearer ' + this.token
+          Authorization: 'Bearer ' + this.cookieService.get("spotifyAccessToken")
         }
       })
         .then(res => res.json());
@@ -60,7 +59,7 @@ export class SpotifyServiceClient {
       return fetch(requestUrl, {
         method: 'GET',
         headers: {
-          Authorization: 'Bearer ' + this.token
+          Authorization: 'Bearer ' + this.cookieService.get("spotifyAccessToken")
         }
       })
         .then(res => res.json());
@@ -75,7 +74,7 @@ export class SpotifyServiceClient {
       return fetch(requestUrl, {
         method: "GET",
         headers: {
-          Authorization: 'Bearer ' + this.token
+          Authorization: 'Bearer ' + this.cookieService.get("spotifyAccessToken")
         }
       }).then(res => res.json())
     }
@@ -86,7 +85,7 @@ export class SpotifyServiceClient {
         return fetch(requestUrl, {
             method: 'GET',
             headers: {
-                Authorization: 'Bearer ' + this.token
+                Authorization: 'Bearer ' + this.cookieService.get("spotifyAccessToken")
             }
         })
             .then(response => {return response.json()})
@@ -98,7 +97,7 @@ export class SpotifyServiceClient {
         return fetch(requestUrl, {
             method: 'GET',
             headers: {
-                Authorization: 'Bearer ' + this.token
+                Authorization: 'Bearer ' + this.cookieService.get("spotifyAccessToken")
             }
         })
             .then(response => {return response.json()})
@@ -110,7 +109,7 @@ export class SpotifyServiceClient {
         return fetch(requestUrl, {
             method: 'GET',
             headers: {
-                Authorization: 'Bearer ' + this.token
+                Authorization: 'Bearer ' + this.cookieService.get("spotifyAccessToken")
             }
         })
             .then(response => {return response.json()})
@@ -122,7 +121,7 @@ export class SpotifyServiceClient {
         return fetch(requestUrl, {
             method: 'GET',
             headers: {
-                Authorization: 'Bearer ' + this.token
+                Authorization: 'Bearer ' + this.cookieService.get("spotifyAccessToken")
             }
         })
             .then(response => {return response.json()})
@@ -134,7 +133,7 @@ export class SpotifyServiceClient {
         return fetch(requestUrl, {
             method: 'GET',
             headers: {
-                Authorization: 'Bearer ' + this.token
+                Authorization: 'Bearer ' + this.cookieService.get("spotifyAccessToken")
             }
         })
             .then(response => {return response.json()})
@@ -146,7 +145,7 @@ export class SpotifyServiceClient {
         return fetch(requestUrl, {
             method: 'GET',
             headers: {
-                Authorization: 'Bearer ' + this.token
+                Authorization: 'Bearer ' + this.cookieService.get("spotifyAccessToken")
             }
         })
             .then(response => {return response.json()})
