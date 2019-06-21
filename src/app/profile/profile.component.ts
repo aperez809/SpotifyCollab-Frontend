@@ -23,8 +23,8 @@ export class ProfileComponent implements OnInit {
 
   userId: String;
   user = {
-    firstname : '',
-    lastname : '',
+    firstName : '',
+    lastName : '',
     username : '',
     profilePicturePath : 'assets/images/vinyl-background.png'
   }
