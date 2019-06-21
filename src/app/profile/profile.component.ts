@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SpotifyServiceClient } from '../services/spotify-service-client';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user-service-client';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
@@ -36,7 +36,8 @@ export class ProfileComponent implements OnInit {
       private activatedRoute: ActivatedRoute,
       private modalService: NgbModal,
       private userService: UserService,
-      private cookieService: CookieService) 
+      private cookieService: CookieService,
+      private router: Router) 
     {
     this.loggedInToSpotify = this.spotifyService.loggedIn();
     if(this.loggedInToSpotify) {
@@ -65,7 +66,8 @@ export class ProfileComponent implements OnInit {
   }
 
   logout = () => {
-    this.userService.logUserOut().then(response => {console.log(response)});
+    this.userService.logUserOut();
+    this.router.navigate(['']);
   }
 
   openContent = (content) => {
@@ -95,7 +97,7 @@ export class ProfileComponent implements OnInit {
         this.spotifyUserUrl = response.external_urls.spotify;
       })
       .then(() => {
-        this.userService.addSpotifyInformation(this.userId, this.spotifyUserName, this.spotifyUserUrl)
+        this.userService.addSpotifyInformation(this.cookieService.get("userId"), this.spotifyUserName, this.spotifyUserUrl)
           .then(status => {console.log(status)})
       })
   }

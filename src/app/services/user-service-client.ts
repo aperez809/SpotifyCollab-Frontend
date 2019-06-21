@@ -56,6 +56,13 @@ export class UserService {
       }
           
       assignSessionToUser(user) { 
+
+        this.cookieService.set("userId", user["_id"]);
+        this.cookieService.set("username", user["username"])
+        this.cookieService.set("firstName", user["firstName"])
+        this.cookieService.set("lastName", user["lastName"])
+        this.cookieService.set("currentPartyId", user["currentPartyId"]);
+
         const assignedSessionId = user["_id"];
         const requestSessionUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value".replace(":name", user["username"]).replace(":value", assignedSessionId);
         return fetch(requestSessionUrl, {
@@ -119,13 +126,7 @@ export class UserService {
     
 
     logUserOut() {
-      return fetch("https://song-request-server-node.herokuapp.com/api/session/reset", {
-        credentials: 'include',
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json'
-        }
-      })
+      this.cookieService.deleteAll();
     }
 
     addSpotifyInformation(userId, spotifyUsername, spotifyUrl) {
