@@ -105,8 +105,17 @@ export class UserService {
         headers: {
           'content-type': 'application/json'
         }
-      })
+      });
     }
+
+    getCurrentUserId() {
+      return this.getSession().then(sesh => {
+        const seshKey = Object.keys(sesh).filter(k => k != "cookie")[0]
+        return sesh[seshKey];
+      });
+    }
+
+    
 
     logUserOut() {
       return fetch("https://song-request-server-node.herokuapp.com/api/session/reset", {
@@ -132,5 +141,6 @@ export class UserService {
           'content-type': 'application/json'
         }
       })
+        .then(response => {return response.json()})
     }
 }

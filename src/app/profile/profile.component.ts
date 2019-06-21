@@ -94,7 +94,7 @@ export class ProfileComponent implements OnInit {
       })
       .then(() => {
         this.userService.addSpotifyInformation(this.userId, this.spotifyUserName, this.spotifyUserUrl)
-          .then(status => {return status})
+          .then(status => {console.log(status)})
       })
   }
 
