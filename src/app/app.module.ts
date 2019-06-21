@@ -22,6 +22,8 @@ import { AlbumComponent } from './album/album.component';
 import { HomePageComponent } from './homepage/homepage.component';
 import { PartyComponent } from './party/party.component';
 import { PartyService } from './services/party-service-client'
+import { CookieService } from 'ngx-cookie-service';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import { PartyService } from './services/party-service-client'
   providers: [
     SpotifyServiceClient,
     UserService,
-    PartyService
+    PartyService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

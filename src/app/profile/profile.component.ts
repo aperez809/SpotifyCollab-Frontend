@@ -3,6 +3,7 @@ import { SpotifyServiceClient } from '../services/spotify-service-client';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../services/user-service-client';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-profile',
@@ -34,7 +35,8 @@ export class ProfileComponent implements OnInit {
       private spotifyService: SpotifyServiceClient, 
       private activatedRoute: ActivatedRoute,
       private modalService: NgbModal,
-      private userService: UserService) 
+      private userService: UserService,
+      private cookieService: CookieService) 
     {
     this.loggedInToSpotify = this.spotifyService.loggedIn();
     if(this.loggedInToSpotify) {
@@ -99,6 +101,8 @@ export class ProfileComponent implements OnInit {
   }
 
   selectTab = tabType => {
+
+    
     this.connectSpotify();
     console.log(this.loggedInToSpotify);
     switch (tabType) {
