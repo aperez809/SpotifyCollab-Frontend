@@ -21,6 +21,7 @@ import { PlaylistComponent } from './playlist/playlist.component';
 import { AlbumComponent } from './album/album.component';
 import { HomePageComponent } from './homepage/homepage.component';
 import { PartyComponent } from './party/party.component';
+import { PartyService } from './services/party-service-client'
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { PartyComponent } from './party/party.component';
   ],
   providers: [
     SpotifyServiceClient,
-    UserService
+    UserService,
+    PartyService
   ],
   bootstrap: [AppComponent]
 })

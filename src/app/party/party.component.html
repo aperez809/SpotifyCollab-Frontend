@@ -1,3 +1,5 @@
-<p>
-  party works!
-</p>
+<div>
+  <h1>{{party.partyName}}</h1>
+  <h4>Party Leader: {{party.partyLeader.username}}</h4>
+  <button className="btn btn-primary" (click)="joinParty(partyId)">Join Party</button>
+</div>
