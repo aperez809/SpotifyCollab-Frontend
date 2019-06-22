@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-spotify',
@@ -10,6 +11,7 @@ export class SpotifyComponent implements OnInit {
 
   constructor(
     private cookieService: CookieService,
+    private router: Router
   ) { 
     this.setTokenCookies();
   }
@@ -29,13 +31,14 @@ export class SpotifyComponent implements OnInit {
     console.log(refreshToken);
     if (accessToken != "") {
       //(!(this.cookieService.get("spotifyAccessToken") && this.cookieService.get("spotifyRefreshToken"))) {
-      this.cookieService.set("spotifyAccessToken", accessToken);
-      this.cookieService.set("spotifyRefreshToken", refreshToken);
+      this.cookieService.set("spotifyAccessToken", accessToken, undefined, "/");
+      this.cookieService.set("spotifyRefreshToken", refreshToken, undefined, "/");
     }
     else {
-      this.cookieService.set("spotifyAccessToken", "N/A");
-      this.cookieService.set("spotifyRefreshToken", "N/A");
+      this.cookieService.set("spotifyAccessToken", "N/A", undefined, "/");
+      this.cookieService.set("spotifyRefreshToken", "N/A", undefined, "/");
     }
+    this.router.navigate(['profile']);
   }
 
   getHashParams() {

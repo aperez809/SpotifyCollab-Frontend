@@ -41,7 +41,7 @@ export class PartyComponent implements OnInit {
     }
 
     this.userService.updateUser(currUser["_id"], partyId);
-    this.cookieService.set("currentPartyId", partyId);
+    this.cookieService.set("currentPartyId", partyId, undefined, "/");
 
     this.partyService.addAttendee(partyId, currUser["_id"]);
 

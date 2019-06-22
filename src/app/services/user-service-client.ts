@@ -57,11 +57,11 @@ export class UserService {
           
       assignSessionToUser(user) { 
 
-        this.cookieService.set("_id", user["_id"], null, "/");
-        this.cookieService.set("username", user["username"], null, "/")
-        this.cookieService.set("firstName", user["firstName"], null, "/")
-        this.cookieService.set("lastName", user["lastName"], null, "/")
-        this.cookieService.set("currentPartyId", user["currentPartyId"], null, "/");
+        this.cookieService.set("_id", user["_id"], undefined, "/");
+        this.cookieService.set("username", user["username"], undefined, "/")
+        this.cookieService.set("firstName", user["firstName"], undefined, "/")
+        this.cookieService.set("lastName", user["lastName"], undefined, "/")
+        this.cookieService.set("currentPartyId", user["currentPartyId"], undefined, "/");
 
         const assignedSessionId = user["_id"];
         const requestSessionUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value".replace(":name", user["username"]).replace(":value", assignedSessionId);
@@ -126,7 +126,7 @@ export class UserService {
     
 
     logUserOut() {
-      this.cookieService.deleteAll();
+      this.cookieService.deleteAll("/");
     }
 
     addSpotifyInformation(userId, spotifyUsername, spotifyUrl) {
