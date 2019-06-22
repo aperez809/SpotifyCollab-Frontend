@@ -11,7 +11,6 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  loggedInToSpotify;
   spotifyUserName = '';
   spotifyUserUrl = '';
   selectedTab = '';
@@ -24,11 +23,17 @@ export class ProfileComponent implements OnInit {
 
   userId: String;
   myProfile: Boolean;
+  loggedInToSpotify: Boolean;
+  validSpotifyToken: Boolean;
+
   user = {
     firstName : '',
     lastName : '',
     username : '',
-    profilePicturePath : 'assets/images/vinyl-background.png'
+    profilePicturePath : 'assets/images/vinyl-background.png',
+    spotifyUser: false,
+    spotifyUserName: '',
+    spotifyUserUrl: ''
   }
 
   constructor(
@@ -41,6 +46,7 @@ export class ProfileComponent implements OnInit {
     {
     this.loggedInToSpotify = this.spotifyService.loggedIn();
     if(this.loggedInToSpotify) {
+      this.validSpotifyToken = this.spotifyService.validToken();
       this.connectSpotify();
     }
   }
@@ -56,13 +62,24 @@ export class ProfileComponent implements OnInit {
         this.userService.findUserById(this.userId)
           .then(res => {
             console.log(res);
-            return this.user = res;
+            this.user = res;
+            return;
         });
       }
       else {
         this.myProfile = true;
+        this.userService.findUserById(this.cookieService.get("_id"))
+          .then(res => {
+            console.log(res);
+            this.user = res;
+            return;
+        });
 
       }
+  }
+
+  toggleEditing = () => {
+    
   }
 
   logout = () => {
@@ -87,6 +104,10 @@ export class ProfileComponent implements OnInit {
 
   showContent = (id) => {
     this.selectedID = id;
+  }
+
+  refreshSpotify = () => {
+
   }
 
   connectSpotify = () => {

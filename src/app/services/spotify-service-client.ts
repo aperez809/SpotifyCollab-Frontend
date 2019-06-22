@@ -15,6 +15,29 @@ export class SpotifyServiceClient {
         return this.cookieService.check("spotifyAccessToken")
     }
 
+    validToken = () => {
+        try {
+            this.getCurrentProfile();
+            console.log("Valid Token")
+            return true;
+        }
+        catch(err) {
+            console.log("Invalid Token")
+            return false;
+        }
+    }
+
+    refreshAccessToken = () => {
+        return fetch(this.requestBaseUrl + "/refresh", {
+            method: 'POST',
+            headers: {
+                Authorization: 'Bearer ' + this.cookieService.get("spotifyAccessToken"),
+                'content-type': 'application/x-www-form-urlencoded'
+            }
+        })
+            .then(response => {return response.json()})
+    }
+
     searchForItem = (searchContent, searchType) => {
         let requestUrl = this.requestBaseUrl + "/search?q="
         requestUrl = requestUrl + searchContent;

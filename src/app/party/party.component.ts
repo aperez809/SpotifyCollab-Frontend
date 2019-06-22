@@ -40,7 +40,7 @@ export class PartyComponent implements OnInit {
       this.partyService.removeAttendee(partyId, currUser["_id"])
     }
 
-    this.userService.updateUser(currUser["_id"], partyId);
+    this.userService.updateUserParty(currUser["_id"], partyId);
     this.cookieService.set("currentPartyId", partyId, undefined, "/");
 
     this.partyService.addAttendee(partyId, currUser["_id"]);
@@ -50,9 +50,17 @@ export class PartyComponent implements OnInit {
     /*this.userService.getCurrentUserId()
       .then(userId => {
         this.partyService.removeAttendee(partyId, userId);
-        this.userService.updateUser(userId, partyId);
+        this.userService.updateUserParty(userId, partyId);
         this.partyService.addAttendee(partyId, userId);
       });*/
+    }
+
+    leaveParty() {
+      const currPartyId = this.cookieService.get('currentPartyId');
+      const currUserId = this.cookieService.get('_id')
+      this.partyService.removeAttendee(currPartyId, currUserId)
+      this.userService.updateUserParty(currUserId, null);
+      this.cookieService.set("currentPartyId", null, undefined, "/");
     }
   
   
@@ -60,6 +68,6 @@ export class PartyComponent implements OnInit {
     /*const userId = this.userService.getCurrentUserId()
       .then(res => res)
     this.partyService.removeAttendee(partyId, userId);
-    this.userService.updateUser(userId, partyId);
+    this.userService.updateUserParty(userId, partyId);
     this.partyService.addAttendee(partyId, userId);*/
 }

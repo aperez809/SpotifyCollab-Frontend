@@ -146,7 +146,7 @@ export class UserService {
         .then(response => {return response.json()})
     }
 
-    updateUser(userId, partyId) {
+    updateUserParty(userId, partyId) {
       const putUrl = "https://song-request-server-node.herokuapp.com/api/users/" + userId;
       return fetch(putUrl, {
         credentials: 'include',
