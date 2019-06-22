@@ -15,15 +15,19 @@ export class ProfileComponent implements OnInit {
   spotifyUserUrl = '';
   spotifyConnected = false;
   selectedTab = '';
+  selectedTabType = '';
   selectedID = '';
   playlists = [];
   tracks = [];
   recent = [];
   following = [];
+  selectedSong = {};
+  selectedArtist = {};
   selectedPlaylist = {};
 
   userId: String;
   myProfile: Boolean;
+  editing: Boolean;
   loggedInToSpotify: Boolean;
   validSpotifyToken: Boolean;
 
@@ -93,21 +97,6 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  openContent = (content) => {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    }, (reason) => {
-    });
-  }
-
-  selectPlaylist = (id, content) => {
-    this.spotifyService
-      .getPlaylistById(id)
-      .then(response => {
-        this.selectedPlaylist = response;
-      })
-    this.openContent(content);
-  }
-
   showContent = (id) => {
     this.selectedID = id;
   }
@@ -132,29 +121,31 @@ export class ProfileComponent implements OnInit {
   }
 
   selectTab = tabType => {
-    this.connectSpotify();
-    console.log(this.loggedInToSpotify);
     switch (tabType) {
       case 'playlist':
         this.selectedTab = 'playlist';
+        this.selectedTabType = 'playlist';
         this.spotifyService
           .getCurrentUserPlaylists()
           .then(response => this.playlists = response.items)
         break;
       case 'library':
         this.selectedTab = 'library';
+        this.selectedTabType = 'library';
         this.spotifyService
           .getCurrentUserLibrary()
           .then(response => this.tracks = response.items)
         break;
       case 'recent':
         this.selectedTab = 'recent';
+        this.selectedTabType = 'recent';
         this.spotifyService
           .getCurrentUserRecent()
           .then(response => this.recent = response.items)
         break;
       case 'following':
         this.selectedTab = 'following';
+        this.selectedTabType = 'following';
         this.spotifyService
           .getCurrentUserFollowing()
           .then(response => this.following = response.artists.items)
@@ -162,6 +153,60 @@ export class ProfileComponent implements OnInit {
       default:
         break;
     }
+  }
+
+
+  selectElementById = (id, content) => {
+    switch (this.selectedTabType) {
+      case 'playlist':
+        return this.selectPlaylistById(id, content);
+      case 'library':
+        return this.selectTrackById(id, content);
+      case 'recent':
+        return this.selectTrackById(id, content);
+      case 'following':
+        return this.selectArtistById(id, content);
+    }
+  }
+
+  selectPlaylistById = (id, content) => {
+    console.log(id)
+    this.spotifyService
+      .getPlaylistById(id)
+      .then(res => {
+        this.selectedPlaylist = res;
+      })
+    this.openContent(content);
+  }
+
+  selectArtistById = (id, content) => {
+    console.log(id)
+    this.spotifyService
+      .getArtistById(id)
+      .then(res => {
+        this.selectedArtist = res;
+      })
+    this.openContent(content);
+  }
+
+  selectTrackById = (id, content) => {
+    console.log(id)
+    this.spotifyService
+      .getTrackById(id)
+      .then(response => {
+        this.selectedSong = response;
+        console.log(response)
+      })
+
+    this.openContent(content);
+  }
+
+
+  openContent = (content) => {
+    console.log("Opening")
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title-playlist'}).result.then((result) => {
+    }, (reason) => {
+    });
   }
 
 }

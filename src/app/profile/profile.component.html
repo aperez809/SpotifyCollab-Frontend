@@ -83,49 +83,169 @@
         </li>
       </ul>
 
-      <div>
-        <ng-template #content let-modal>
-          <div class="modal-header">
-            <h4 class="modal-title" id="modal-basic-title">{{ selectedPlaylist.name }}</h4>
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <img class="col-12" src={{selectedPlaylist.images[0].url}}/>
-            <p class="col-12">Description: {{selectedPlaylist.description}}</p>
-            <a class="col-12" href={{selectedPlaylist.external_urls.spotify}}>Open in Spotify</a>
-          </div>
-        </ng-template>
-      </div>
-
-      <div class="mt-2" [ngSwitch]="selectedTab">
+      <div class="mt-2" [ngSwitch]="selectedTabType">
         <ul class="list-group" *ngSwitchCase="'playlist'">
-          <li *ngFor="let playlist of playlists" class="list-group-item" (click)=selectPlaylist(playlist.id,content)>
-            <a routerLink="/playlist/{{playlist.id}}">{{ playlist.name }}</a>
-            <div *ngIf="playlist.id == selectedID">
-              <img src={{playlist.images[0].url}} />
-            </div>
+          <li *ngFor="let playlist of playlists" 
+            class="list-group-item" 
+            (click)=selectElementById(playlist.id,content)>
+            {{ playlist.name }}
           </li>
         </ul>
         <ul class="list-group" *ngSwitchCase="'library'">
-          <li *ngFor="let track of tracks" class="list-group-item">
-            <a href="#" routerLink="/track/{{track.track.id}}">{{ track.track.name }}</a>
+          <li *ngFor="let track of tracks" 
+            class="list-group-item" 
+            (click)=selectElementById(track.track.id,content)>
+            {{ track.track.name }}
           </li>
         </ul>
         <ul class="list-group" *ngSwitchCase="'recent'">
-          <li *ngFor="let recentTrack of recent" class="list-group-item">
-            <a href="#" routerLink="/track/{{recentTrack.track.id}}">{{ recentTrack.track.name }}</a>
+          <li *ngFor="let recentTrack of recent" 
+            class="list-group-item" 
+            (click)=selectElementById(recentTrack.track.id,content)>
+            {{ recentTrack.track.name }}
           </li>
         </ul>
         <ul class="list-group" *ngSwitchCase="'following'">
-          <li *ngFor="let artist of following" class="list-group-item">
-            <a href="#" routerLink="/artist/{{artist.id}}">{{ artist.name }}</a>
+          <li *ngFor="let artist of following" 
+            class="list-group-item" 
+            (click)=selectElementById(artist.id,content)>
+            {{ artist.name }}
           </li>
         </ul>
 
         <ul *ngSwitchDefault></ul>
       </div>
     </div>
+  </div>
+
+
+
+  <div [ngSwitch]="true">
+    <ng-template #content let-modal id="modal-basic-title-playlist" >
+      <div class="modal-header" *ngSwitchCase="selectedTabType == 'playlist'">
+        <h4 class="modal-title" >{{ selectedPlaylist.name }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">
+            <i class="fas fa-times text-danger"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-header" *ngSwitchCase="selectedTabType == 'following'">
+        <h4 class="modal-title" >{{ selectedArtist.name }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">
+            <i class="fas fa-times text-danger"></i>
+          </span>
+        </button>
+      </div>
+      <div class="modal-header" *ngSwitchCase="selectedTabType == 'library' || selectedTabType == 'recent'">
+        <h4 class="modal-title" >{{ selectedSong.name }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">
+            <i class="fas fa-times text-danger"></i>
+          </span>
+        </button>
+      </div>
+
+      <div class="modal-body" *ngSwitchCase="selectedTabType == 'playlist'">
+        <span 
+          routerLink="/playlist/{{selectedPlaylist.id}}"
+          (click)="modal.dismiss('Cross click')">
+          <img class="col-12" src={{selectedPlaylist.images[0].url}}/>
+        </span>
+        <div class="container">
+          <div class="row mt-4">
+            <div class="float-right">
+              <div class="">
+                <button type="button" 
+                  class="btn btn-primary btn-lg" 
+                  routerLink="/playlist/{{selectedPlaylist.id}}"
+                  (click)="modal.dismiss('Cross click')">
+                  See more...
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="float-right">
+              <a role="button" 
+                class="btn btn-dark" 
+                href={{selectedPlaylist.external_urls.spotify}}
+                target="_blank">
+                Open in Spotify
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body" *ngSwitchCase="selectedTabType == 'following'">
+        <span 
+          routerLink="/artist/{{selectedArtist.id}}"
+          (click)="modal.dismiss('Cross click')">
+          <img class="col-12" src={{selectedArtist.images[0].url}}/>
+        </span>
+        <div class="row mt-4">
+          <div class="row col-12 ml-1">
+            <div class="">
+              <button type="button" 
+                class="btn btn-primary btn-lg" 
+                routerLink="/artist/{{selectedArtist.id}}"
+                (click)="modal.dismiss('Cross click')">
+                See more...
+              </button>
+            </div>
+          </div>
+          <div class="row col-12 mt-3 ml-1">
+            <a role="button" 
+              class="btn btn-dark" 
+              href={{selectedArtist.external_urls.spotify}}
+              target="_blank">
+              Open in Spotify
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body" *ngSwitchCase="selectedTabType == 'library' || selectedTabType == 'recent'">
+        <span 
+          routerLink="/track/{{selectedSong.id}}"
+          (click)="modal.dismiss('Cross click')">
+          <img class="col-12" src={{selectedSong.album.images[0].url}}/>
+        </span>
+        <div class="row mt-4">
+          <div class="row col-12 ml-1">
+            <div class="">
+              <button type="button" 
+                class="btn btn-primary btn-lg" 
+                routerLink="/track/{{selectedSong.id}}"
+                (click)="modal.dismiss('Cross click')">
+                See more...
+              </button>
+            </div>
+            <div class="ml-auto">
+              <i class="fas fa-plus-circle text-success fa-3x text-right"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Add to Queue"></i>
+            </div>
+          </div>
+          <div class="row col-12 mt-3 ml-1">
+            <a role="button" 
+              class="btn btn-dark" 
+              href={{selectedSong.external_urls.spotify}}
+              target="_blank">
+              Open in Spotify
+            </a>
+            <a role="button"
+              href={{selectedSong.preview_url}}
+              target="_blank">
+              <i class="fas fa-play-circle text-secondary fa-2x ml-3 mt-1"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Listen to Preview"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>
