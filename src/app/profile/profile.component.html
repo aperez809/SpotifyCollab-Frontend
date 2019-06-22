@@ -37,12 +37,21 @@
   <div class="col-8" *ngIf="myProfile">
     <div class="row">
         <button
+          *ngIf="!editing"
           class="btn btn-warning text-dark ml-auto"
           role="button"
           (click)="toggleEditing()">
           Edit Profile
         </button>
         <button
+          *ngIf="editing"
+          class="btn btn-secondary text-light ml-auto"
+          role="button"
+          (click)="toggleEditing()">
+          Cancel
+        </button>
+        <button
+          *ngIf="!editing"
           class="btn btn-danger text-dark ml-2"
           role="button"
           (click)="logout()">
@@ -55,11 +64,66 @@
           href='https://song-request-spotify-server.herokuapp.com/'>
           Refresh Spotify
         </a>
-        
     </div>
 
 
-    <div class="mt-4" *ngIf="loggedInToSpotify && myProfile">
+    <div class="mt-4" *ngIf="myProfile && editing">
+        <form>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input class="form-control" type="text" id="username" placeholder={{user.username}} readonly>
+          </div>
+          <div class="form-group">
+            <label for="inputFirstName">First Name</label>
+            <input type="text" 
+              [(ngModel)]="editedFirstName"
+              name="firstname"
+              class="form-control" 
+              id="inputFirstName" 
+              aria-describedby="firstNameHelp" 
+              placeholder={{user.firstName}}>
+          </div>
+          <div class="form-group">
+            <label for="inputLastName">Last Name</label>
+            <input type="text" 
+              [(ngModel)]="editedLastName"
+              name="lastname"
+              class="form-control" 
+              id="inputLastName" 
+              aria-describedby="LastNameHelp" 
+              placeholder={{user.lastName}}>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" 
+            [(ngModel)]="editedPassword"
+            name="password"
+            class="form-control" 
+            id="inputPassword" 
+            placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label for="spotifyUserName">Spotify Username</label>
+            <input class="form-control" type="text" id="spotifyUserName" placeholder={{user.spotifyUsername}} readonly>
+          </div>
+          <button
+            class="btn btn-danger text-light mt-3"
+            role="button"
+            (click)="removeSpotify()">
+            Remove Spotify
+          </button>
+          <small id="removeSpotify" class="form-text text-muted">Your Spotify account will no longer be linked to your profile.</small>
+          <button
+            class="btn btn-success text-light mt-3"
+            role="button"
+            (click)="confirmChanges()">
+            Confirm Changes
+          </button>
+        </form>
+    </div>
+
+
+    <div class="mt-4" *ngIf="loggedInToSpotify && myProfile && !editing">
       <ul class="nav nav-tabs">
         <li class="nav-item" (click)="selectTab('playlist')">
           <a class="nav-link text-secondary" [ngClass]="{active: selectedTab === 'playlist'}">

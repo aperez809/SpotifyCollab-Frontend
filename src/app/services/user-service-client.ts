@@ -123,10 +123,43 @@ export class UserService {
       });
     }
 
+    editUserProfile(userId, firstName, lastName, password) {
+      const editProfileUrl = "https://song-request-server-node.herokuapp.com/api/users/:userId".replace(":userId", userId);
+      return fetch(editProfileUrl, {
+        credentials: 'include',
+        method: 'PUT',
+        body: JSON.stringify({
+          "password": password,
+          "firstName": firstName,
+          "lastName": lastName,
+        }),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+        .then(response => {return response.json()})
+    }
     
 
     logUserOut() {
       this.cookieService.deleteAll("/");
+    }
+
+    removeSpotifyInformation(userId) {
+      const removeSpotifyUrl = "https://song-request-server-node.herokuapp.com/api/users/:userId".replace(":userId", userId);
+      return fetch(removeSpotifyUrl, {
+        credentials: 'include',
+        method: 'PUT',
+        body: JSON.stringify({
+          "spotifyUser": false,
+          "spotifyUsername": null,
+          "spotifyUrl": null,
+        }),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+        .then(response => {return response.json()})
     }
 
     addSpotifyInformation(userId, spotifyUsername, spotifyUrl) {

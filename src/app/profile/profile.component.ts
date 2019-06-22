@@ -24,6 +24,9 @@ export class ProfileComponent implements OnInit {
   selectedSong = {};
   selectedArtist = {};
   selectedPlaylist = {};
+  editedFirstName = '';
+  editedLastName = '';
+  editedPassword = '';
 
   userId: String;
   myProfile: Boolean;
@@ -35,12 +38,13 @@ export class ProfileComponent implements OnInit {
     username : '',
     firstName : '',
     lastName : '',
+    password: '',
     currentPartyId: null,
     userType: 'LISTENER',
     dob: null,
     profilePicturePath : 'assets/images/vinyl-background.png',
     spotifyUser: false,
-    spotifyUserName: '',
+    spotifyUsername: '',
     spotifyUrl: ''
   }
 
@@ -89,7 +93,7 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleEditing = () => {
-
+    this.editing = !this.editing;
   }
 
   logout = () => {
@@ -97,12 +101,36 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  confirmChanges = () => {
+    if(this.editedFirstName == '' || this.editedPassword == '') {
+      this.editedFirstName = this.user.firstName;
+      this.editedLastName = this.user.lastName;
+      this.editedPassword = this.user.password;
+    }
+    else {
+      this.userService.editUserProfile(this.cookieService.get("_id"), 
+        this.editedFirstName, 
+        this.editedLastName,
+        this.editedPassword)
+      .then(status => {
+        this.editing = false;
+        this.ngOnInit();
+      })
+    }
+  }
+
   showContent = (id) => {
     this.selectedID = id;
   }
 
-  refreshSpotify = () => {
-
+  removeSpotify = () => {
+    this.userService.removeSpotifyInformation(this.cookieService.get("_id"))
+      .then(status => {
+        this.spotifyConnected = false;
+        this.loggedInToSpotify = false;
+        this.spotifyService.killTokens();
+        this.ngOnInit();
+      })
   }
 
   connectSpotify = () => {

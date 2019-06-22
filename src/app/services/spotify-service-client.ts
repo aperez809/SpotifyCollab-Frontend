@@ -15,6 +15,11 @@ export class SpotifyServiceClient {
         return this.cookieService.check("spotifyAccessToken")
     }
 
+    killTokens = () => {
+        this.cookieService.delete("spotifyAccessToken", "/");
+        this.cookieService.delete("spotifyRefreshToken", "/");
+    }
+
     validToken = () => {
         try {
             this.getCurrentProfile();
