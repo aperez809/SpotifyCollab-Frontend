@@ -40,9 +40,9 @@ export class PartyService {
         'content-type': 'application/json'
       },
       body: {
-        spotifyId: trackId,
-        trackName: trackName,
-        artistName: artistName
+        "spotifyId": trackId,
+        "trackName": trackName,
+        "artistName": artistName
       }
     });
   }
