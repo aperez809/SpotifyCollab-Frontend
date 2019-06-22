@@ -39,11 +39,11 @@ export class PartyService {
       headers: {
         'content-type': 'application/json'
       },
-      body: {
+      body: JSON.stringify({
         "spotifyId": trackId,
         "trackName": trackName,
         "artistName": artistName
-      }
+      })
     });
   }
 
