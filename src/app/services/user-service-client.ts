@@ -139,6 +139,18 @@ export class UserService {
       })
         .then(response => {return response.json()})
     }
+
+    deleteUserProfile (userId) {
+      const deleteProfileUrl = "https://song-request-server-node.herokuapp.com/api/users/:userId".replace(":userId", userId);
+      return fetch(deleteProfileUrl, {
+        credentials: 'include',
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+        .then(response => {return response.json()})
+    }
     
 
     logUserOut() {

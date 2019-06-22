@@ -133,6 +133,14 @@ export class ProfileComponent implements OnInit {
       })
   }
 
+  deleteUserAccount = () => {
+    this.userService.deleteUserProfile(this.cookieService.get("_id"))
+      .then(status => {
+        this.cookieService.deleteAll("/");
+        this.router.navigate(['']);
+      })
+  }
+
   connectSpotify = () => {
     this.spotifyService
       .getCurrentProfile()
@@ -231,10 +239,15 @@ export class ProfileComponent implements OnInit {
 
 
   openContent = (content) => {
-    console.log("Opening")
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title-playlist'}).result.then((result) => {
     }, (reason) => {
     });
   }
 
+  openDeleteAccount = (deleteAccount) => {
+    console.log("Opening")
+    this.modalService.open(deleteAccount, {ariaLabelledBy: 'modal-delete-account'}).result.then((result) => {
+    }, (reason) => {
+    });
+  }
 }
