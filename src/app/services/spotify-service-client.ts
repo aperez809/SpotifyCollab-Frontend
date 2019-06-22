@@ -5,26 +5,14 @@ import { CookieService } from 'ngx-cookie-service';
 export class SpotifyServiceClient {
     private token : string;
     private refreshToken : string;
-    private requestBaseUrl: string;
     private displayName: string;
     private userHref: string;
+    requestBaseUrl = "https://api.spotify.com/v1";
 
     constructor(private cookieService: CookieService) {}
 
     loggedIn = () => {
         return this.cookieService.check("spotifyAccessToken")
-    }
-
-    setTokenCookies = () => {
-        const params = this.getHashParams();
-        console.log(params);
-        this.requestBaseUrl = "https://api.spotify.com/v1";
-        if (params["access_token"] && params["refresh_token"]) {
-            //(!(this.cookieService.get("spotifyAccessToken") && this.cookieService.get("spotifyRefreshToken"))) {
-            console.log("FIRUWFHEWUBWUFEWNFOQIHWFNE");
-            this.cookieService.set("spotifyAccessToken", params["access_token"]);
-            this.cookieService.set("spotifyRefreshToken", params["refresh_token"]);
-        }
     }
 
     searchForItem = (searchContent, searchType) => {

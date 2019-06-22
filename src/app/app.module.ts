@@ -23,6 +23,7 @@ import { HomePageComponent } from './homepage/homepage.component';
 import { PartyComponent } from './party/party.component';
 import { PartyService } from './services/party-service-client'
 import { CookieService } from 'ngx-cookie-service';
+import { SpotifyComponent } from './spotify/spotify.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { CookieService } from 'ngx-cookie-service';
     PlaylistComponent,
     AlbumComponent,
     HomePageComponent,
-    PartyComponent
+    PartyComponent,
+    SpotifyComponent
   ],
   imports: [
     BrowserModule,

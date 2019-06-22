@@ -10,6 +10,7 @@ import {ArtistComponent} from './artist/artist.component';
 import {PlaylistComponent} from './playlist/playlist.component';
 import {AlbumComponent} from './album/album.component';
 import { PartyComponent } from './party/party.component';
+import { SpotifyComponent } from './spotify/spotify.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomePageComponent},
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
   { path: 'artist/:artistId', component: ArtistComponent},
   { path: 'album/:albumId', component: AlbumComponent},
   { path: 'playlist/:playlistId', component: PlaylistComponent},
-  { path: 'party/:partyId', component: PartyComponent}
+  { path: 'party/:partyId', component: PartyComponent},
+  { path: 'spotify', component: SpotifyComponent}
 
 ];
 
