@@ -66,6 +66,7 @@ export class ProfileComponent implements OnInit {
         this.userService.findUserById(this.userId)
           .then(res => {
             console.log(res);
+            this.spotifyConnected = res.spotifyUser;
             this.user = res;
             return;
         });
