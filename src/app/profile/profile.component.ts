@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class ProfileComponent implements OnInit {
   spotifyUserName = '';
   spotifyUserUrl = '';
+  spotifyConnected = false;
   selectedTab = '';
   selectedID = '';
   playlists = [];
@@ -27,13 +28,16 @@ export class ProfileComponent implements OnInit {
   validSpotifyToken: Boolean;
 
   user = {
+    username : '',
     firstName : '',
     lastName : '',
-    username : '',
+    currentPartyId: null,
+    userType: 'LISTENER',
+    dob: null,
     profilePicturePath : 'assets/images/vinyl-background.png',
     spotifyUser: false,
     spotifyUserName: '',
-    spotifyUserUrl: ''
+    spotifyUrl: ''
   }
 
   constructor(
@@ -71,6 +75,7 @@ export class ProfileComponent implements OnInit {
         this.userService.findUserById(this.cookieService.get("_id"))
           .then(res => {
             console.log(res);
+            this.spotifyConnected = res.spotifyUser;
             this.user = res;
             return;
         });
@@ -79,7 +84,7 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleEditing = () => {
-    
+
   }
 
   logout = () => {
@@ -113,19 +118,19 @@ export class ProfileComponent implements OnInit {
   connectSpotify = () => {
     this.spotifyService
       .getCurrentProfile()
-      .then(response => {
-        this.spotifyUserName = response.display_name; 
-        this.spotifyUserUrl = response.external_urls.spotify;
-      })
-      .then(() => {
-        this.userService.addSpotifyInformation(this.cookieService.get("userId"), this.spotifyUserName, this.spotifyUserUrl)
-          .then(status => {console.log(status)})
-      })
+        .then(response => {
+          this.spotifyUserName = response.display_name; 
+          this.spotifyUserUrl = response.external_urls.spotify;
+        })
+        .then(() => {
+          this.userService.addSpotifyInformation(this.cookieService.get("_id"), this.spotifyUserName, this.spotifyUserUrl)
+            .then(status => {
+              this.ngOnInit();
+            })
+        })
   }
 
   selectTab = tabType => {
-
-    
     this.connectSpotify();
     console.log(this.loggedInToSpotify);
     switch (tabType) {

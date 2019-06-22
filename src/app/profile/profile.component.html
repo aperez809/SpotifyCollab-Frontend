@@ -9,18 +9,19 @@
       <div class="ml-1">
         <h2 class="font-weight-bold mt-4">{{ user.firstName }} {{ user.lastName }}</h2>
         <h4 class="font-weight-light text-muted">{{ user.username }}</h4>
-        <h5 class="mt-4" *ngIf="loggedInToSpotify">
+        <h5 class="mt-4" *ngIf="spotifyConnected">
               <span>
                   <img inline src="assets/images/Spotify_Icon_RGB_Green.png" alt="Spotify" class="spotify-icon mb-1 mr-1">
               </span>
-          {{ spotifyUserName }}
+          {{ user.spotifyUsername }}
         </h5>
-        <div class="mt-5" *ngIf="loggedInToSpotify">
-          <a href={{spotifyUserUrl}}>
+        <div class="mt-5" *ngIf="spotifyConnected">
+          <a href={{user.spotifyUrl}}
+            target="_blank">
             <img src="assets/images/Spotify_Logo_RGB_Black.png" alt="Spotify Logo" class="spotify-logo mb-1 mr-auto">
           </a>
         </div>
-        <h5 class="mt-4" *ngIf="!loggedInToSpotify && myProfile">
+        <h5 class="mt-4" *ngIf="!spotifyConnected && myProfile">
               <span>
                   <img inline src="assets/images/Spotify_Icon_RGB_Green.png" alt="Spotify" class="spotify-icon mb-1">
               </span>
@@ -49,7 +50,7 @@
         </button>
         <a
           role="button"
-          *ngIf="!validSpotifyToken"
+          *ngIf="!validSpotifyToken && user.spotifyUser"
           class="btn btn-success btn-block text-dark mt-4"
           href='https://song-request-spotify-server.herokuapp.com/'>
           Refresh Spotify
