@@ -14,11 +14,8 @@ export class PartyService {
   }
 
   async removeAttendee(pid, uid) {
-    return fetch("http://song-request-server-node.herokuapp.com/api/parties/removeUser/" + pid, {
+    return fetch("http://song-request-server-node.herokuapp.com/api/parties/removeUser/" + pid + "/removeUser/" + uid, {
       method: 'PUT',
-      body: JSON.stringify({
-        userId: uid
-      }),
       headers: {
         'content-type': 'application/json'
       }
@@ -36,16 +33,38 @@ export class PartyService {
     });
   }
 
+  addSongToQueue = (pid, trackId, trackName, artistName) => {
+    return fetch("http://song-request-server-node.herokuapp.com/api/parties/" + pid + "/addSong", {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: {
+        spotifyId: trackId,
+        trackName: trackName,
+        artistName: artistName
+      }
+    });
+  }
 
-  getSession() {
-    return fetch("http://song-request-server-node.herokuapp.com/api/session/get", {
-      method: 'GET',
+  removeSongFromQueue = (pid, spotifyId) => {
+    return fetch("http://song-request-server-node.herokuapp.com/api/parties/" + pid + "/removeSong/" + spotifyId, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+    });
+  }
+
+  setDJ = (pid, userId) => {
+    return fetch("http://song-request-server-node.herokuapp.com/api/parties" + pid + "/setDJ/" + userId, {
+      method: 'PUT',
       headers: {
         'content-type': 'application/json'
       }
-    }).then(user => user.json());
-
+    });
   }
+
 
 
 }
