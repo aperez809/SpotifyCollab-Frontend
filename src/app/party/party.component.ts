@@ -17,7 +17,9 @@ export class PartyComponent implements OnInit {
     passwordReq: false,
     password: '',
     bannedUsers: [],
-    partyLeader: {},
+    partyLeader: {
+      username: ''
+    },
     queue: []
   };
   partyId = '';
