@@ -34,13 +34,10 @@ export class UserService {
           console.log(userData);
           return userData
         });
-
-      //return this.assignSessionToUser(fulfilledPromise);
-
       }
 
-      async findUserById(id: String) {
-        return await fetch("https://song-request-server-node.herokuapp.com/api/users/" + id, {
+      findUserById(id: String) {
+        return fetch("https://song-request-server-node.herokuapp.com/api/users/" + id, {
           method: 'GET',
           headers: {
               'content-type': 'application/json'
@@ -54,6 +51,27 @@ export class UserService {
             return userData
           });
       }
+
+      findUserByUsername(un: String) {
+        console.log(un)
+        return fetch("https://song-request-server-node.herokuapp.com/api/users/register", {
+          credentials: 'include',
+          method: 'POST',
+          body: JSON.stringify({
+            username: un
+          }),
+          headers: {
+              'content-type': 'application/json'
+          }
+        })
+          .then(user => {
+            return user.json();
+          })
+          .then(userData => {
+            console.log(userData);
+            return userData
+          });
+        }
 
       assignSessionToUser(user) {
 

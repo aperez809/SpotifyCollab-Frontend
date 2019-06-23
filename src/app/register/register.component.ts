@@ -10,12 +10,11 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
-  username: String;
-  password: String;
-  firstName: String;
-  lastName: String;
-  registerFailed: false;
+  username = '';
+  password = '';
+  firstName = '';
+  lastName = '';
+  registerFailed = false;
 
   constructor(
     private router: Router,
@@ -26,16 +25,28 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.userService.createUser(this.username, this.password, this.firstName, this.lastName)
-      .then(user => {
-        return user.json();
-      })
-      .then(userData => {
-        if (userData) {
-          this.userService.assignSessionToUser(userData);
-          this.router.navigate(['profile']);
+    if(this.username == '' || this.password == '', this.firstName == '') {
+      alert("Username, Password, and First Name fields are required");
+    }
+    else {
+      return this.userService.findUserByUsername(this.username)
+        .then(res => {
+          alert("This username is already taken");
+        })
+        .catch((err: Error) => {
+          this.userService.createUser(this.username, this.password, this.firstName, this.lastName)
+          .then(user => {
+            return user.json();
+          })
+          .then(userData => {
+            if (userData) {
+              this.userService.assignSessionToUser(userData);
+              this.router.navigate(['profile']);
+            }
+          })
         }
-      });
+      )
+    }
   }
 
 }

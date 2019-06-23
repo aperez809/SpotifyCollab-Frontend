@@ -141,31 +141,31 @@
           </button>
         </form>
         <ng-template #deleteAccount let-modal>
-            <div class="modal-header">
-              <h4 class="modal-title" id="modal-delete-account">Confirm Delete Account</h4>
-              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <h4 class="font-weight-bold">Are you sure you wish to delete your account?</h4>
-              <h5 class="font-weight-light mt-4">This action cannot be undone.</h5>
-            </div>
-            <div class="modal-footer">
-                <button
-                class="btn btn-secondary text-light mr-auto"
-                role="button"
-                (click)="modal.dismiss('Cross click')">
-                Cancel
-              </button>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-delete-account">Confirm Delete Account</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h4 class="font-weight-bold">Are you sure you wish to delete your account?</h4>
+            <h5 class="font-weight-light mt-4">This action cannot be undone.</h5>
+          </div>
+          <div class="modal-footer">
               <button
-                class="btn btn-danger text-light"
-                role="button"
-                (click)="deleteUserAccount(); modal.dismiss('Cross click')">
-                Delete Account
-              </button>
-            </div>
-          </ng-template>
+              class="btn btn-secondary text-light mr-auto"
+              role="button"
+              (click)="modal.dismiss('Cross click')">
+              Cancel
+            </button>
+            <button
+              class="btn btn-danger text-light"
+              role="button"
+              (click)="deleteUserAccount(); modal.dismiss('Cross click')">
+              Delete Account
+            </button>
+          </div>
+        </ng-template>
     </div>
 
 
