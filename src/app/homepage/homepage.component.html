@@ -1,6 +1,17 @@
 <div class="container">
   <h1>Available Parties</h1>
 
+  <div >
+    <input type="text"
+           [(ngModel)]="partyName"
+           name="partyName"
+           class="form-control"
+           id="inputPartyName"
+           aria-describedby="LastNameHelp"
+           placeholder="Party Name">
+    <button class="btn btn-success" (click)="createParty()">Create Party</button>
+  </div>
+
   <div class="col-12">
       <div class="mt-2">
         <ul class="list-group">

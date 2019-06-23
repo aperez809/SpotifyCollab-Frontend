@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import {PartyService} from "../services/party-service-client";
 
 @Component({
   selector: 'app-homepage',
@@ -8,25 +9,22 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class HomePageComponent implements OnInit {
   availableParties = [];
-  apiBaseUrl = "http://song-request-server-node.herokuapp.com/api/";
+  partyName = '';
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService,
+              private partyService: PartyService) { }
   ngOnInit() {
-    this.getPartyList()
+    this.partyService.getPartyList()
       .then(res => {
         this.availableParties = res;
       });
+
   }
 
-  getPartyList() {
-    const partyUrl = this.apiBaseUrl + "parties";
-    return fetch(partyUrl, {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json'
-      }
-    }).then(res => {
-      return res.json();
-    });
+  createParty() {
+    this.partyService.createParty(this.partyName, this.cookieService.get("_id"))
+      .then(res => this.ngOnInit());
+
   }
+
 }

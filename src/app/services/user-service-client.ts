@@ -8,7 +8,7 @@ export class UserService {
     private requestBaseUrl: string;
     private sessionBaseUrl: string;
     currentUserData;
-    
+
 
     constructor(private cookieService: CookieService) {
       this.requestBaseUrl = "https://song-request-server-node.herokuapp.com/api/users/login";
@@ -34,7 +34,7 @@ export class UserService {
           console.log(userData);
           return userData
         });
-    
+
       //return this.assignSessionToUser(fulfilledPromise);
 
       }
@@ -54,8 +54,8 @@ export class UserService {
             return userData
           });
       }
-          
-      assignSessionToUser(user) { 
+
+      assignSessionToUser(user) {
 
         this.cookieService.set("_id", user["_id"], undefined, "/");
         this.cookieService.set("username", user["username"], undefined, "/")
@@ -78,7 +78,7 @@ export class UserService {
         })
         .then(resData => {
           return resData;
-        });    
+        });
     }
 
     createUser(username: String, password: String, firstName: String, lastName: String) {
@@ -105,7 +105,7 @@ export class UserService {
           return resData;
           });
       }
-    
+
     getSession() {
       return fetch("https://song-request-server-node.herokuapp.com/api/session/get", {
         credentials: 'include',
@@ -151,7 +151,7 @@ export class UserService {
       })
         .then(response => {return response.json()})
     }
-    
+
 
     logUserOut() {
       this.cookieService.deleteAll("/");
@@ -202,7 +202,21 @@ export class UserService {
         headers: {
           'content-type': 'application/json'
         }
-      }).then(res => console.log(res.json()))
+      }).then(res => console.log(res.json()));
+    }
+
+    updateUserType(uid, userType) {
+      const putUrl = "https://song-request-server-node.herokuapp.com/api/users/" + uid;
+      return fetch(putUrl, {
+        credentials: 'include',
+        method: 'PUT',
+        body: JSON.stringify({
+          userType: userType
+        }),
+        headers: {
+          'content-type': 'application/json'
+        }
+      }).then(res => console.log(res.json()));
     }
 
     addRecentTrack(userId, spotifyId, trackName, artistName) {
@@ -227,6 +241,6 @@ export class UserService {
               'content-type': 'application/json'
             }
           }).then(status => {return status})
-        })
+        });
     }
 }
