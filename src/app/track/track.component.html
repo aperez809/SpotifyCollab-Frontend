@@ -1,15 +1,42 @@
 <div class="container">
-  <div class="col-12">
+  <div class="row">
     <h1>{{track.name}}</h1>
-    <h4 href="#" routerLink="/artist/{{track.artists[0].id}}">{{track.artists[0].name}}</h4>
-    <a href="#" routerLink="/album/{{track.album.id}}">{{track.album.name}}</a>
-    <img src="{{track.album.images[0].url}}"/>
+  </div>
+  <div class="row">
+    <h4 href="#" routerLink="/artist/{{track.artists[0].id}}">Artist: {{track.artists[0].name}}</h4>
+  </div>
+  <div class="row">
+    <h5 routerLink="/album/{{track.album.id}}">Album: {{track.album.name}}</h5>
+  </div>
+  <div class="row">
+    <img height="300" width="300" src="{{track.album.images[0].url}}"/>
+  </div>
+  <div class="row mt-2">
+    <h4>Information:</h4>
 
-    <p>Duration (in ms): {{track.duration_ms}}</p>
-    <p>Explicit: {{track.explicit}}</p>
-    <p>Popularity Score: {{track.popularity}}</p>
-    <a href="{{track.preview_url}}">Preview Link</a>
-
+  </div>
+  <div>
+    <h5>Duration (in ms): {{track.duration_ms}}</h5>
+    <h5>Explicit: {{track.explicit}}</h5>
+    <h5>Popularity Score: {{track.popularity}}</h5>
+  </div>
+  <div class="row mb-3">
+      <div class="mr-auto">
+      <a role="button"
+        href={{track.external_urls.spotify}}
+        target="_blank">
+        <i class="fas fa-play-circle text-secondary text-right fa-3x ml-2 mt-1"
+        data-toggle="tooltip"
+        data-placement="top"
+        title="Listen to Preview"></i>
+      </a>
+        <i class="fas fa-plus-circle text-success fa-3x ml-4 text-right"
+        data-toggle="tooltip"
+        data-placement="top"
+        role="button" 
+        (click)="addTrackToQueue()"
+        title="Add to Queue"></i>
+      </div>
   </div>
 </div>
 

@@ -18,7 +18,7 @@
           </button>
           <button
             class="btn btn-danger text-light"
-            *ngIf="myParty()"
+            *ngIf="myParty() && !isAdmin()"
             role="button"
             (click)="leaveParty()">
             End Party
