@@ -1,16 +1,24 @@
 <div class="container">
-  <div class="col-12">
+  <div class="row">
     <h1>{{artist.name}}</h1>
-    <p>Followers: {{artist.followers.total}}</p>
-    <img src="{{artist.images[0].url}}"/>
-    <p>Popularity Score: {{artist.popularity}}</p>
-    <p>Genres: </p>
-    <ul class="list-group">
-      <li *ngFor="let genre of artist.genres" class="list-group-item">
+  </div>
+  <div class="row">
+    <h4>Followers: {{artist.followers.total}}</h4>
+  </div>
+  <div class="row">
+    <img height="300" width="300" src="{{artist.images[0].url}}"/>
+  </div>
+  <div class="row mt-2">
+    <h4>Information:</h4>
+  </div>
+  <div>
+    <h5>Popularity Score: {{artist.popularity}}</h5>
+    <h5>Genres: </h5>
+    <ul class="list-group ml-3">
+      <a *ngFor="let genre of artist.genres">
         {{genre}}
-      </li>
+      </a>
     </ul>
-
   </div>
 </div>
 
