@@ -67,8 +67,8 @@ export class PartyService {
     return await foundParty.json();
   }
 
-  async removeAttendee(pid, uid) {
-    return fetch("http://song-request-server-node.herokuapp.com/api/parties/removeUser/" + pid + "/removeUser/" + uid, {
+  removeAttendee(pid, uid) {
+    return fetch("http://song-request-server-node.herokuapp.com/api/parties/" + pid + "/removeUser/" + uid, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json'
