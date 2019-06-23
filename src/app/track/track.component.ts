@@ -30,7 +30,10 @@ export class TrackComponent implements OnInit {
     },
     external_urls: {
       spotify: ''
-    }
+    },
+    duration_ms: '',
+    explicit: false,
+    popularity: ''
   }
   trackId = -1;
 
