@@ -95,6 +95,14 @@ export class PartyComponent implements OnInit {
       })
   }
 
+  removeUserFromParty(id) {
+    this.partyService.removeAttendee(this.partyId, id)
+      .then(res => {
+        this.router.navigate(['/party', this.partyId])
+        this.ngOnInit();
+      })
+  }
+
   myParty() {
     return this.cookieService.get("username") == this.party.partyLeader.username;
   }

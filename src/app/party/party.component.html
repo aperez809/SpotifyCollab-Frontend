@@ -71,6 +71,14 @@
             <a class="text-dark font-weight-light">
               {{user.username}}
             </a>
+            <br/>
+            <button
+              class="btn btn-danger text-light mt-2"
+              *ngIf="myParty()"
+              role="button"
+              (click)="removeUserFromParty(user['_id'])">
+              Remove
+            </button>
           </li>
         </ul>
       </div>
