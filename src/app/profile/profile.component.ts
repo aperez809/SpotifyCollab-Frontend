@@ -95,17 +95,7 @@ export class ProfileComponent implements OnInit {
       }
   }
 
-  /*
-  addTrackToQueue = () => {
-    this.partyService.addSongToQueue(
-      this.cookieService.get("currentPartyId"),
-      this.cookieService.get("_id"),
-      this.selectedSong["name"],
-      this.selectedSong["artists"][0]["name"])
-  }
-*/
-
-  addRecentTrack = (spotifyId, trackName, artistName) => {
+  addTrackToQueue = (spotifyId, trackName, artistName) => {
     this.userService.addRecentTrack(this.cookieService.get("_id"),
         spotifyId, trackName, artistName)
       .then(res => {

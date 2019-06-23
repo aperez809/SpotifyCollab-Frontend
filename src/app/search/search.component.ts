@@ -3,6 +3,7 @@ import { SpotifyServiceClient } from '../services/spotify-service-client';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import {PartyService} from "../services/party-service-client";
+import { UserService } from '../services/user-service-client';
 
 @Component({
   selector: 'app-search',
@@ -25,6 +26,7 @@ export class SearchComponent implements OnInit {
     private spotifyService: SpotifyServiceClient,
     private modalService: NgbModal,
     private cookieService: CookieService,
+    private userService: UserService,
     private partyService: PartyService) { }
 
 
@@ -155,13 +157,20 @@ export class SearchComponent implements OnInit {
   }
 
   addTrackToQueue = () => {
-    console.log("Step 1")
-    this.partyService.addSongToQueue(
-      this.cookieService.get("currentPartyId"),
-      this.selectedSong["id"],
-      this.selectedSong["name"],
-      this.selectedSong["artists"][0]["name"],
-      this.cookieService.get("_id"))
+    let spotifyId = this.selectedSong["id"];
+    let trackName = this.selectedSong["name"];
+    let artistName = this.selectedSong["artists"][0]["name"];
+    this.userService.addRecentTrack(this.cookieService.get("_id"),
+        spotifyId, trackName, artistName)
+      .then(res => {
+        this.partyService.addSongToQueue(this.cookieService.get("currentPartyId"), 
+          spotifyId, 
+          trackName, 
+          artistName,
+          this.cookieService.get("_id"))
+          .then(res => {
+            return
+          })
+      })
   }
-
 }
