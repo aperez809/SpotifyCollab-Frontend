@@ -33,6 +33,17 @@
     </div>
   </div>
 
+  <div class="col-8 col-lg-9" *ngIf="!myProfile">
+      <h4>Recent Tracks</h4>
+      <ul class="list-group">
+        <li *ngFor="let track of user.recentTracks" 
+        class="list-group-item" 
+        (click)=selectElementById(track.spotifyId,content)>
+        {{ track.trackName }}
+        </li>
+      </ul>
+    </div>
+
 
   <div class="col-8 col-lg-9" *ngIf="myProfile">
     <div class="row">
@@ -322,6 +333,7 @@
               <i class="fas fa-plus-circle text-success fa-3x text-right"
               data-toggle="tooltip"
               data-placement="top"
+              (click)="addRecentTrack(selectedSong.id, selectedSong.name, selectedSong.artists[0].name)"
               title="Add to Queue"></i>
             </div>
           </div>
