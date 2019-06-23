@@ -9,12 +9,12 @@
     </ul>
     <img src="{{album.images[0].url}}"/>
     <h6>Tracks:</h6>
-    <ul className="list-group">
+    <ul class="list-group">
 
-      <li *ngFor="let track of album.tracks.items" className="list-group-item">
+      <li *ngFor="let track of album.tracks.items" class="list-group-item">
         {{track.name}}  By: {{track.artists[0].name}}
-        <button className="btn btn-primary">Add to Queue</button>
-        <a className="btn btn-secondary" href="#" routerLink="/track/{{track.id}}">Go To</a>
+        <button class="btn btn-primary float-right">Add to Queue</button>
+        <a class="btn btn-secondary float-right" href="#" routerLink="/track/{{track.id}}">Go To</a>
       </li>
     </ul>
 

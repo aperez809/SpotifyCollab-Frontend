@@ -5,12 +5,12 @@
     <img src="{{playlist.images[0].url}}"/>
     <p>Followers: {{playlist.followers.total}}</p>
     <p>Description: {{playlist.description}}</p>
-    <ul className="list-group">
-      <li *ngFor="let track of playlist.tracks.items" className="list-group-item">
+    <ul class="list-group">
+      <li *ngFor="let track of playlist.tracks.items" class="list-group-item">
         <a href="#" routerLink="/track/{{track.track.id}}">{{track.track.name}}</a>
         By:
         <a href="#" routerLink="/artist/{{track.track.artists[0].id}}">{{track.track.artists[0].name}}</a>
-        <button className="btn btn-primary">Add to Queue</button>
+        <button class="btn btn-primary float-right">Add to Queue</button>
       </li>
     </ul>
   </div>
