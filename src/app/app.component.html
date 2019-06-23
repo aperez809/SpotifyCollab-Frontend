@@ -7,23 +7,23 @@
     </button>
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
-            <li *ngIf="!(this.cookieService.check('_id'))"
+            <li *ngIf="!loggedIn()"
                 class="nav-item">
                 <a class="nav-link" routerLink="/register" href="#">Sign Up</a>
             </li>
-            <li *ngIf="!(this.cookieService.check('_id'))"
+            <li *ngIf="!loggedIn()"
                 class="nav-item">
                 <a class="nav-link" routerLink="/login" href="#">Log in</a>
             </li>
-            <li *ngIf="this.cookieService.check('_id')" 
+            <li *ngIf="loggedIn()" 
                 class="nav-item">
                 <a class="nav-link" routerLink="/profile" href="#">Profile</a>
             </li>
-            <li *ngIf="this.cookieService.check('_id')"
+            <li *ngIf="loggedIn()"
                 class="nav-item">
                 <a class="nav-link" routerLink="/search" href="#">Search</a>
             </li>
-            <li *ngIf="this.cookieService.get('currentPartyId') == 'null'"
+            <li *ngIf="!inParty()"
                 class="nav-item">
                 <a class="nav-link" routerLink="/" href="#">Join a Party</a>
             </li>
@@ -36,12 +36,12 @@
         </ul>
         <span class="navbar-text">
             <a class="nav-link active"
-                *ngIf="!this.cookieService.get('currentPartyId') == 'null'">
-                {{ this.cookieService.get("currentPartyName") }}
+                *ngIf="!inParty()">
+                {{ currentPartyName() }}
             </a>
             <a class="nav-link active"
-                *ngIf="this.cookieService.check('_id')">
-                {{ this.cookieService.get("username") }}
+                *ngIf="loggedIn()">
+                {{ currentUsername() }}
             </a>
         </span>
     </div>

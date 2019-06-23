@@ -24,4 +24,20 @@ export class AppComponent {
     this.navbarOpen = !this.navbarOpen;
   }
 
+  loggedIn() {
+    return this.cookieService.check('_id');
+  }
+
+  inParty() {
+    return this.cookieService.get('currentPartyId') !== 'null';
+  }
+
+  currentUsername() {
+    return this.cookieService.get("username")
+  }
+
+  currentPartyName() {
+    return this.cookieService.get("currentPartyName");
+  }
+
 }
