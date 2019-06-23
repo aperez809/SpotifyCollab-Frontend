@@ -1,17 +1,27 @@
 <div class="container">
-  <div class="col-12">
+  <div class="row">
     <h1>{{playlist.name}}</h1>
-    <p>Owner: {{playlist.owner.display_name}}</p>
-    <img src="{{playlist.images[0].url}}"/>
-    <p>Followers: {{playlist.followers.total}}</p>
-    <p>Description: {{playlist.description}}</p>
+  </div>
+  <div class="row">
+    <h4>Owner: {{playlist.owner.display_name}}</h4>
+  </div>
+  <div class="row">
+    <img height="300" width="300" src="{{playlist.images[0].url}}"/>
+  </div>
+  <div class="row mt-2">
+    <h4>Information:</h4>
+  </div>
+  <div>
+    <h5>Followers: {{playlist.followers.total}}</h5>
+    <h2 class="mt-3">Tracks:</h2>
     <ul class="list-group">
-      <li *ngFor="let track of playlist.tracks.items" class="list-group-item">
-        <a href="#" routerLink="/track/{{track.track.id}}">{{track.track.name}}</a>
-        By:
-        <a href="#" routerLink="/artist/{{track.track.artists[0].id}}">{{track.track.artists[0].name}}</a>
-        <button class="btn btn-primary float-right">Add to Queue</button>
+      <li *ngFor="let track of playlist.tracks.items" class="list-group-item" href="#" routerLink="/track/{{track.track.id}}">
+        <h4 class="text-dark font-weight-bold">
+            {{track.track.name}}
+        </h4>
+        <a class="text-dark font-weight-light">
+            {{track.track.artists[0].name}}
+        </a>
       </li>
     </ul>
   </div>
-</div>
