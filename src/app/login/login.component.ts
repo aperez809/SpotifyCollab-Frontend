@@ -9,9 +9,9 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username: String;
-  password: String;
-  failedLogin: Boolean = false;
+  username = '';
+  password = '';
+  failedLogin = false;
 
   constructor(
     private router: Router,
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
         }).catch((err: Error) => {
         console.log(err)
         this.failedLogin = true;
+        alert("Incorrect username or password, please try again");
       });
 
 }
