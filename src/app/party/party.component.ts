@@ -66,9 +66,9 @@ export class PartyComponent implements OnInit {
 
     async leaveParty() {
       const currPartyId = this.cookieService.get('currentPartyId');
-      const currUserId = this.cookieService.get('username');
-      if (this.party.partyLeader.username === currUserId) {
-        console.log("Step 1")
+      const currUsername = this.cookieService.get('username');
+      const currUserId = this.cookieService.get("_id");
+      if (this.party.partyLeader.username === currUsername) {
         await this.partyService.deleteParty(currPartyId);
         await this.userService.updateUserParty(currUserId, null)
         await this.userService.updateUserType(currUserId, 'LISTENER')
