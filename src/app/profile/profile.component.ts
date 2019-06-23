@@ -150,6 +150,13 @@ export class ProfileComponent implements OnInit {
       })
   }
 
+  deleteAccountAdmin = () => {
+    this.userService.deleteUserProfile(this.userId)
+      .then(status => {
+        this.router.navigate(['']);
+      })
+  }
+
   connectSpotify = () => {
     this.spotifyService
       .getCurrentProfile()
@@ -244,6 +251,10 @@ export class ProfileComponent implements OnInit {
       })
 
     this.openContent(content);
+  }
+
+  isAdmin = () => {
+    return this.cookieService.get("userType") == "ADMIN";
   }
 
 

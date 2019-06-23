@@ -22,14 +22,17 @@ export class HomePageComponent implements OnInit {
   }
 
   createParty() {
-    this.cookieService.set("currentPartyName", this.partyName, undefined, "/")
+    this.cookieService.set("currentPartyName", this.partyName, undefined, "/");
     this.partyService.createParty(this.partyName, this.cookieService.get("_id"))
-      .then(res => 
-        this.ngOnInit());
+      .then(res => {
+        this.partyName = '';
+        this.ngOnInit()
+      }
+      );
   }
 
   loggedIn() {
-    return this.cookieService.check("_id");
+    return this.cookieService.check("_id")
   }
 
 }
