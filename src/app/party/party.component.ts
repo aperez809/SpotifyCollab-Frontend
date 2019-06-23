@@ -48,13 +48,10 @@ export class PartyComponent implements OnInit {
     if (currUser["currentPartyId"] != "undefined" || currUser["currentPartyId"] != undefined) {
       this.partyService.removeAttendee(partyId, currUser["_id"]).catch();
     }
-
     this.userService.updateUserParty(currUser["_id"], partyId);
     this.cookieService.set("currentPartyId", partyId, undefined, "/");
-
+    this.cookieService.set("currentPartyName", this.party.partyName, undefined, "/");
     this.partyService.addAttendee(partyId, currUser["_id"]);
-
-
     }
 
     async leaveParty() {
@@ -72,6 +69,14 @@ export class PartyComponent implements OnInit {
         await this.userService.updateUserParty(currUserId, null);
         await this.cookieService.set("currentPartyId", null, undefined, "/");
       }
+    }
+
+    myParty() {
+      return this.cookieService.get("username") == this.party.partyLeader.username;
+    }
+
+    inParty() {
+      return this.cookieService.get("currentPartyId") == this.partyId;
     }
 
 

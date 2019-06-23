@@ -1,13 +1,38 @@
-<div>
-  <h1>{{party.partyName}}</h1>
-  <h4>Party Leader: {{party.partyLeader.username}}</h4>
-  <button className="btn btn-primary" (click)="joinParty(partyId)">Join Party</button>
-  <button className="btn btn-primary" (click)="leaveParty()">Leave Party</button>
-  <div>
-    <ul>
-    <li *ngFor="let track of party.queue">
-      <a href="#" routerLink="/track/{{track.id}}">{{track.trackName}}</a>
-    </li>
-  </ul>
+<div class="container-fluid">
+    <div class="row">
+        <h1 class="col-8">{{party.partyName}}</h1>
+        <div class="col-4 ml-auto">
+          <button
+            class="btn btn-success text-light mr-2"
+            *ngIf="!inParty()"
+            role="button"
+            (click)="joinParty(partyId)">
+            Join Party
+          </button>
+          <button
+            class="btn btn-danger text-light"
+            *ngIf="inParty()"
+            role="button"
+            (click)="leaveParty()">
+            Leave Party
+          </button>
+        </div>
+    </div>
+    <h4>Party Leader: {{party.partyLeader.username}}</h4>
+    <div class="row">
+      <div class="col-8">
+        <ul>
+          <li *ngFor="let track of party.queue">
+            <a href="#" routerLink="/track/{{track.spotifyId}}">{{track.trackName}}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-4">
+          <ul>
+            <li *ngFor="let user of party.attendees">
+              <a href="#" routerLink="/profile/user._id">{{user.username}}</a>
+            </li>
+          </ul>
+      </div>
+    </div>
   </div>
-</div>

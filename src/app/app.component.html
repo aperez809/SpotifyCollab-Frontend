@@ -7,6 +7,9 @@
     </button>
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }" id="navbarNavDropdown">
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/" href="#">Home</a>
+            </li>
             <li *ngIf="!loggedIn()"
                 class="nav-item">
                 <a class="nav-link" routerLink="/register" href="#">Sign Up</a>
@@ -36,9 +39,11 @@
         </ul>
         <span class="navbar-text">
             <a class="nav-link active"
-                *ngIf="!inParty()">
+                *ngIf="inParty()">
                 {{ currentPartyName() }}
             </a>
+        </span>
+        <span class="navbar-text">
             <a class="nav-link active"
                 *ngIf="loggedIn()">
                 {{ currentUsername() }}
