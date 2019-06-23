@@ -41,7 +41,7 @@ export class PartyComponent implements OnInit {
       });
   }
 
-  
+
 
   joinParty(partyId) {
     const currUser = this.cookieService.getAll();
@@ -55,7 +55,7 @@ export class PartyComponent implements OnInit {
     this.partyService.addAttendee(partyId, currUser["_id"]);
 
 
-    
+
     /*this.userService.getCurrentUserId()
       .then(userId => {
         this.partyService.removeAttendee(partyId, userId);
@@ -64,15 +64,24 @@ export class PartyComponent implements OnInit {
       });*/
     }
 
-    leaveParty() {
+    async leaveParty() {
       const currPartyId = this.cookieService.get('currentPartyId');
-      const currUserId = this.cookieService.get('_id')
-      this.partyService.removeAttendee(currPartyId, currUserId)
-      this.userService.updateUserParty(currUserId, null);
-      this.cookieService.set("currentPartyId", null, undefined, "/");
+      const currUserId = this.cookieService.get('username');
+      if (this.party.partyLeader.username === currUserId) {
+        console.log("Step 1")
+        await this.partyService.deleteParty(currPartyId);
+        await this.userService.updateUserParty(currUserId, null)
+        await this.userService.updateUserType(currUserId, 'LISTENER')
+        this.cookieService.set("currentPartyId", null, undefined, "/");
+      } else {
+        console.log("Step 2")
+        await this.partyService.removeAttendee(currPartyId, currUserId)
+        await this.userService.updateUserParty(currUserId, null);
+        await this.cookieService.set("currentPartyId", null, undefined, "/");
+      }
     }
-  
-  
+
+
 
     /*const userId = this.userService.getCurrentUserId()
       .then(res => res)

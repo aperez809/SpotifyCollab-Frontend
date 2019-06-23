@@ -52,6 +52,15 @@ export class PartyService {
     });
   }
 
+  deleteParty = (currParty) => {
+    return fetch("http://song-request-server-node.herokuapp.com/api/parties/" + currParty, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
+
 
   async findPartyById(partyId: String) {
     let foundParty = await fetch("http://song-request-server-node.herokuapp.com/api/parties/" + partyId)
