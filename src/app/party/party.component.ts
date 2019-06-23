@@ -12,8 +12,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class PartyComponent implements OnInit {
 
-  private party: String;
-  private partyId: String;
+  party: String;
+  partyId: String;
 
   constructor(private activatedRoute: ActivatedRoute,
               private partyService: PartyService,
