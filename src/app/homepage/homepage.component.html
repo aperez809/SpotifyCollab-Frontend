@@ -1,28 +1,36 @@
 <div class="container">
-  <h1>Available Parties</h1>
-
-  <div >
-    <input type="text"
-           [(ngModel)]="partyName"
-           name="partyName"
-           class="form-control"
-           id="inputPartyName"
-           aria-describedby="LastNameHelp"
-           placeholder="Party Name">
-    <button class="btn btn-success" (click)="createParty()">Create Party</button>
+  <h1>Party Zone</h1>
+  <div class="row mt-3">
+    <div class="col-8">
+        <input type="text"
+        [(ngModel)]="partyName"
+        name="partyName"
+        class="form-control"
+        id="inputPartyName"
+        aria-describedby="partyNameHelp"
+        placeholder="Party Name">
+    </div>
+    <div class="col-4">
+      <button class="btn btn-success" (click)="createParty()">Create Party</button>
+    </div>
   </div>
 
-  <div class="col-12">
+
+  <div class="mt-4 mr-auto">
       <div class="mt-2">
         <ul class="list-group">
             <li *ngFor="let currParty of availableParties"
-                class="list-group-item">
-                <a href="#"
-                  routerLink="/party/{{ currParty._id }}">
+                class="list-group-item"
+                routerLink="/party/{{ currParty._id }}">
+                <h4
+                  class="text-dark font-weight-bold">
                   {{ currParty.partyName }}
+                </h4>
+                <a
+                  class="text-dark font-weight-light">
+                  Host: {{ currParty.partyLeader.username }}
                 </a>
             </li>
-
         </ul>
       </div>
     </div>

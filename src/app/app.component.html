@@ -39,7 +39,8 @@
                 routerLink="/" 
                 href="#">Join Party</a>
             <a class="nav-link active"
-                *ngIf="inParty()">
+                *ngIf="inParty()"
+                routerLink="/party/{{currentPartyId()}}">
                 {{ currentPartyName() }}
             </a>
         </span>

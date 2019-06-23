@@ -40,4 +40,8 @@ export class AppComponent {
     return this.cookieService.get("currentPartyName");
   }
 
+  currentPartyId() {
+    return this.cookieService.get("currentPartyId");
+  }
+
 }
