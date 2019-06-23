@@ -10,6 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppComponent {
   title = 'Song Request';
   activeComponent = 'profile';
+  navbarOpen = false;
 
   constructor(
     private modalService: NgbModal,
@@ -17,6 +18,26 @@ export class AppComponent {
 
   selectComponent = component => {
     this.activeComponent = component;
+  }
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
+
+  loggedIn() {
+    return this.cookieService.check('_id');
+  }
+
+  inParty() {
+    return this.cookieService.get('currentPartyId') !== 'null';
+  }
+
+  currentUsername() {
+    return this.cookieService.get("username")
+  }
+
+  currentPartyName() {
+    return this.cookieService.get("currentPartyName");
   }
 
 }

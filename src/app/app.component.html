@@ -1,37 +1,49 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="#" routerLink="/">
         Song Request
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li *ngIf="!(this.cookieService.check('_id'))"
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li *ngIf="!loggedIn()"
                 class="nav-item">
                 <a class="nav-link" routerLink="/register" href="#">Sign Up</a>
             </li>
-            <li *ngIf="!(this.cookieService.check('_id'))"
+            <li *ngIf="!loggedIn()"
                 class="nav-item">
                 <a class="nav-link" routerLink="/login" href="#">Log in</a>
             </li>
-            <li *ngIf="this.cookieService.check('_id')"
-                class="nav-item mr-2">
-                <a class="nav-link" href="#">Welcome Back, {{ this.cookieService.get("firstName") }}</a>
-            </li>
-            <li *ngIf="this.cookieService.get('currentPartyId') == 'undefined'"
-                class="nav-item">
-                <a class="nav-link" routerLink="/" href="#">Join a Party</a>
-            </li>
-            <li *ngIf="this.cookieService.check('_id')" 
+            <li *ngIf="loggedIn()" 
                 class="nav-item">
                 <a class="nav-link" routerLink="/profile" href="#">Profile</a>
             </li>
-            <li *ngIf="this.cookieService.check('_id')"
+            <li *ngIf="loggedIn()"
                 class="nav-item">
                 <a class="nav-link" routerLink="/search" href="#">Search</a>
             </li>
+            <li *ngIf="!inParty()"
+                class="nav-item">
+                <a class="nav-link" routerLink="/" href="#">Join a Party</a>
+            </li>
+            <li class="d-block d-sm-none">
+                <a class="nav-link active"
+                *ngIf="this.cookieService.check('_id')">
+                    Logged In:
+                </a>
+            </li>
         </ul>
+        <span class="navbar-text">
+            <a class="nav-link active"
+                *ngIf="!inParty()">
+                {{ currentPartyName() }}
+            </a>
+            <a class="nav-link active"
+                *ngIf="loggedIn()">
+                {{ currentUsername() }}
+            </a>
+        </span>
     </div>
 </nav>
 <router-outlet></router-outlet>

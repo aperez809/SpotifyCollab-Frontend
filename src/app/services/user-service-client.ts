@@ -218,4 +218,29 @@ export class UserService {
         }
       }).then(res => console.log(res.json()));
     }
+
+    addRecentTrack(userId, spotifyId, trackName, artistName) {
+      const putUrl = "https://song-request-server-node.herokuapp.com/api/users/" + userId;
+      let addedTrack = {
+        "spotifyId": spotifyId,
+        "trackName": trackName,
+        "artistName": artistName
+      }
+      let trackList = [];
+      return this.findUserById(userId)
+        .then(response => {
+          trackList = response.recentTracks;
+          trackList.push(addedTrack);
+          return fetch(putUrl, {
+            credentials: 'include',
+            method: 'PUT',
+            body: JSON.stringify({
+              recentTracks: trackList
+            }),
+            headers: {
+              'content-type': 'application/json'
+            }
+          }).then(status => {return status})
+        });
+    }
 }

@@ -45,7 +45,8 @@ export class ProfileComponent implements OnInit {
     profilePicturePath : 'assets/images/vinyl-background.png',
     spotifyUser: false,
     spotifyUsername: '',
-    spotifyUrl: ''
+    spotifyUrl: '',
+    recentTracks: []
   }
 
   constructor(
@@ -90,6 +91,14 @@ export class ProfileComponent implements OnInit {
         });
 
       }
+  }
+
+  addRecentTrack = (spotifyId, trackName, artistName) => {
+    this.userService.addRecentTrack(this.cookieService.get("_id"),
+        spotifyId, trackName, artistName)
+      .then(res => {
+        return
+      })
   }
 
   toggleEditing = () => {
