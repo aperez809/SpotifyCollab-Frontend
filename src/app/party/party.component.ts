@@ -11,9 +11,16 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./party.component.css']
 })
 export class PartyComponent implements OnInit {
-
-  party: String;
-  partyId: String;
+  party = {
+    partyName: '',
+    attendees: [],
+    passwordReq: false,
+    password: '',
+    bannedUsers: [],
+    partyLeader: {},
+    queue: []
+  };
+  partyId = '';
 
   constructor(private activatedRoute: ActivatedRoute,
               private partyService: PartyService,
