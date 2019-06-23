@@ -39,7 +39,9 @@
         <li *ngFor="let track of user.recentTracks" 
         class="list-group-item" 
         (click)=selectElementById(track.spotifyId,content)>
-        {{ track.trackName }}
+        <h4>{{ track.trackName }}</h4>
+        <h5 class="font-weight-light">{{ track.artistName }}</h5>
+
         </li>
       </ul>
     </div>
@@ -333,6 +335,7 @@
               <i class="fas fa-plus-circle text-success fa-3x text-right"
               data-toggle="tooltip"
               data-placement="top"
+              role="button" 
               (click)="addRecentTrack(selectedSong.id, selectedSong.name, selectedSong.artists[0].name)"
               title="Add to Queue"></i>
             </div>
