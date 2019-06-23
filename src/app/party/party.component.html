@@ -4,7 +4,7 @@
         <div class="col-4 ml-auto">
           <button
             class="btn btn-success text-light mr-2"
-            *ngIf="!inParty()"
+            *ngIf="!inParty() && loggedIn()"
             role="button"
             (click)="joinParty(partyId)">
             Join Party

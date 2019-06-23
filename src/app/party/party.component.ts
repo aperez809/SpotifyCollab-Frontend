@@ -99,6 +99,10 @@ export class PartyComponent implements OnInit {
     return this.cookieService.get("username") == this.party.partyLeader.username;
   }
 
+  loggedIn() {
+    return this.cookieService.check("_id");
+  }
+
   inParty() {
     return this.cookieService.get("currentPartyId") == this.partyId;
   }
