@@ -80,6 +80,7 @@ export class UserService {
         this.cookieService.set("firstName", user["firstName"], undefined, "/")
         this.cookieService.set("lastName", user["lastName"], undefined, "/")
         this.cookieService.set("currentPartyId", user["currentPartyId"], undefined, "/");
+        this.cookieService.set("userType", user["userType"], undefined, "/");
 
         const assignedSessionId = user["_id"];
         const requestSessionUrl = "https://song-request-server-node.herokuapp.com/api/session/set/:name/:value".replace(":name", user["username"]).replace(":value", assignedSessionId);

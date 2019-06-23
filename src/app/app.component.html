@@ -18,13 +18,13 @@
                 class="nav-item">
                 <a class="nav-link" routerLink="/login" href="#">Log in</a>
             </li>
-            <li *ngIf="loggedIn()" 
-                class="nav-item">
-                <a class="nav-link" routerLink="/profile" href="#">Profile</a>
-            </li>
             <li *ngIf="loggedIn()"
                 class="nav-item">
                 <a class="nav-link" routerLink="/search" href="#">Search</a>
+            </li>
+            <li *ngIf="loggedIn()" 
+                class="nav-item">
+                <a class="nav-link" routerLink="/profile" href="#">Profile</a>
             </li>
             <li class="d-block d-sm-none">
                 <a class="nav-link active"

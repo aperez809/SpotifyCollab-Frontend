@@ -44,16 +44,17 @@ export class PartyComponent implements OnInit {
 
 
 
-  joinParty(partyId) {
+  async joinParty(partyId) {
     const currUser = this.cookieService.getAll();
     if (currUser["currentPartyId"] != "undefined" || currUser["currentPartyId"] != undefined) {
       this.partyService.removeAttendee(partyId, currUser["_id"]).catch();
     }
-    this.userService.updateUserParty(currUser["_id"], partyId);
-    this.cookieService.set("currentPartyId", partyId, undefined, "/");
-    this.cookieService.set("currentPartyName", this.party.partyName, undefined, "/");
-    this.partyService.addAttendee(partyId, currUser["_id"]);
-    }
+    await this.userService.updateUserParty(currUser["_id"], partyId);
+    await this.cookieService.set("currentPartyId", partyId, undefined, "/");
+    await this.cookieService.set("currentPartyName", this.party.partyName, undefined, "/");
+    await this.partyService.addAttendee(partyId, currUser["_id"]);
+    await this.ngOnInit();
+  }
 
   async leaveParty() {
     const currPartyId = this.cookieService.get('currentPartyId');
