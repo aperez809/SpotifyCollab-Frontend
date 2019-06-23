@@ -23,6 +23,13 @@
             (click)="leaveParty()">
             End Party
           </button>
+          <button
+            class="btn btn-danger text-light mt-2"
+            *ngIf="isAdmin()"
+            role="button"
+            (click)="deleteParty()">
+            Delete Party
+          </button>
         </div>
     </div>
     <h4>Party Leader: {{party.partyLeader.username}}</h4>

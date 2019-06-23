@@ -61,6 +61,7 @@ export class PartyComponent implements OnInit {
     const currUsername = this.cookieService.get('username');
     const currUserId = this.cookieService.get("_id");
     if (this.party.partyLeader.username === currUsername) {
+      await this.router.navigate(['']);
       await this.partyService.deleteParty(currPartyId);
       await this.userService.updateUserParty(currUserId, null)
       await this.userService.updateUserType(currUserId, 'LISTENER')
@@ -71,17 +72,32 @@ export class PartyComponent implements OnInit {
       await this.userService.updateUserParty(currUserId, null);
       await this.cookieService.set("currentPartyId", null, undefined, "/");
       await this.cookieService.set("currentPartyName", null, undefined, "/");
-      await this.router.navigate(['']);
     }
   }
 
-    myParty() {
-      return this.cookieService.get("username") == this.party.partyLeader.username;
+  async deleteParty() {
+    /*
+    if(this.party.attendees.length > 0) {
+      for (let user in this.party.attendees) {
+        await this.userService.updateUserParty(user["_id"], null)
+      }
     }
+    */
+    await this.partyService.deleteParty(this.partyId);
+    await this.router.navigate(['']);
+  }
 
-    inParty() {
-      return this.cookieService.get("currentPartyId") == this.partyId;
-    }
+  myParty() {
+    return this.cookieService.get("username") == this.party.partyLeader.username;
+  }
+
+  inParty() {
+    return this.cookieService.get("currentPartyId") == this.partyId;
+  }
+
+  isAdmin() {
+    return this.cookieService.get("userType") == "ADMIN";
+  }
 
 
 
