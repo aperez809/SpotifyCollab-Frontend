@@ -106,7 +106,7 @@
       </div>
 
       <div class="modal-body" *ngSwitchCase="'playlist'">
-        <span 
+        <span
           routerLink="/playlist/{{selectedPlaylist.id}}"
           (click)="modal.dismiss('Cross click')">
           <img class="col-12" src={{selectedPlaylist.images[0].url}}/>
@@ -115,8 +115,8 @@
           <div class="row mt-4">
             <div class="float-right">
               <div class="">
-                <button type="button" 
-                  class="btn btn-primary btn-lg" 
+                <button type="button"
+                  class="btn btn-primary btn-lg"
                   routerLink="/playlist/{{selectedPlaylist.id}}"
                   (click)="modal.dismiss('Cross click')">
                   See more...
@@ -126,8 +126,8 @@
           </div>
           <div class="row mt-3">
             <div class="float-right">
-              <a role="button" 
-                class="btn btn-dark" 
+              <a role="button"
+                class="btn btn-dark"
                 href={{selectedPlaylist.external_urls.spotify}}
                 target="_blank">
                 Open in Spotify
@@ -137,7 +137,7 @@
         </div>
       </div>
       <div class="modal-body" *ngSwitchCase="'artist'">
-        <span 
+        <span
           routerLink="/artist/{{selectedArtist.id}}"
           (click)="modal.dismiss('Cross click')">
           <img class="col-12" src={{selectedArtist.images[0].url}}/>
@@ -145,8 +145,8 @@
         <div class="row mt-4">
           <div class="row col-12 ml-1">
             <div class="">
-              <button type="button" 
-                class="btn btn-primary btn-lg" 
+              <button type="button"
+                class="btn btn-primary btn-lg"
                 routerLink="/artist/{{selectedArtist.id}}"
                 (click)="modal.dismiss('Cross click')">
                 See more...
@@ -154,8 +154,8 @@
             </div>
           </div>
           <div class="row col-12 mt-3 ml-1">
-            <a role="button" 
-              class="btn btn-dark" 
+            <a role="button"
+              class="btn btn-dark"
               href={{selectedArtist.external_urls.spotify}}
               target="_blank">
               Open in Spotify
@@ -164,7 +164,7 @@
         </div>
       </div>
       <div class="modal-body" *ngSwitchCase="'track'">
-        <span 
+        <span
           routerLink="/track/{{selectedSong.id}}"
           (click)="modal.dismiss('Cross click')">
           <img class="col-12" src={{selectedSong.album.images[0].url}}/>
@@ -172,8 +172,8 @@
         <div class="row mt-4">
           <div class="row col-12 ml-1">
             <div class="">
-              <button type="button" 
-                class="btn btn-primary btn-lg" 
+              <button type="button"
+                class="btn btn-primary btn-lg"
                 routerLink="/track/{{selectedSong.id}}"
                 (click)="modal.dismiss('Cross click')">
                 See more...
@@ -183,12 +183,13 @@
               <i class="fas fa-plus-circle text-success fa-3x text-right"
               data-toggle="tooltip"
               data-placement="top"
-              title="Add to Queue"></i>
+              title="Add to Queue"
+              (click)="addTrackToQueue()"></i>
             </div>
           </div>
           <div class="row col-12 mt-3 ml-1">
-            <a role="button" 
-              class="btn btn-dark" 
+            <a role="button"
+              class="btn btn-dark"
               href={{selectedSong.external_urls.spotify}}
               target="_blank">
               Open in Spotify
@@ -205,7 +206,7 @@
         </div>
       </div>
       <div class="modal-body" *ngSwitchCase="'album'">
-        <span 
+        <span
           routerLink="/album/{{selectedAlbum.id}}"
           (click)="modal.dismiss('Cross click')">
           <img class="col-12" src={{selectedAlbum.images[0].url}}/>
@@ -213,8 +214,8 @@
         <div class="row mt-4">
           <div class="row col-12 ml-1">
             <div class="">
-              <button type="button" 
-                class="btn btn-primary btn-lg" 
+              <button type="button"
+                class="btn btn-primary btn-lg"
                 routerLink="/album/{{selectedAlbum.id}}"
                 (click)="modal.dismiss('Cross click')">
                 See more...
@@ -222,8 +223,8 @@
             </div>
           </div>
           <div class="row col-12 mt-3 ml-1">
-            <a role="button" 
-              class="btn btn-dark" 
+            <a role="button"
+              class="btn btn-dark"
               href={{selectedAlbum.external_urls.spotify}}
               target="_blank">
               Open in Spotify

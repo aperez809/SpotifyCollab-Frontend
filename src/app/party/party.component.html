@@ -3,4 +3,11 @@
   <h4>Party Leader: {{party.partyLeader.username}}</h4>
   <button className="btn btn-primary" (click)="joinParty(partyId)">Join Party</button>
   <button className="btn btn-primary" (click)="leaveParty()">Leave Party</button>
+  <div>
+    <ul>
+    <li *ngFor="let track of party.queue">
+      <a href="#" routerLink="/track/{{track.id}}">{{track.trackName}}</a>
+    </li>
+  </ul>
+  </div>
 </div>

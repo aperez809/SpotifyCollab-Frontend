@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyServiceClient } from '../services/spotify-service-client';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
+import {PartyService} from "../services/party-service-client";
 
 @Component({
   selector: 'app-search',
@@ -23,7 +24,8 @@ export class SearchComponent implements OnInit {
   constructor(
     private spotifyService: SpotifyServiceClient,
     private modalService: NgbModal,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private partyService: PartyService) { }
 
 
   ngOnInit() {
@@ -150,6 +152,15 @@ export class SearchComponent implements OnInit {
 
   updateSearchContent = (event) => {
     this.searchContent = event.target.value;
+  }
+
+  addTrackToQueue = () => {
+    console.log("Step 1")
+    this.partyService.addSongToQueue(
+      this.cookieService.get("currentPartyId"),
+      this.cookieService.get("_id"),
+      this.selectedSong["name"],
+      this.selectedSong["artists"][0]["name"])
   }
 
 }
