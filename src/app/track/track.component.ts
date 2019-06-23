@@ -13,9 +13,24 @@ import { PartyService } from '../services/party-service-client';
 export class TrackComponent implements OnInit {
 
   track = {
+    name: '',
     spotifyId: '',
+    artists: [{
+      id: '',
+      name: ''
+    }],
     trackName: '',
-    artistName: ''
+    artistName: '',
+    album: {
+      id: '',
+      name: '',
+      images: [{
+        url: ''
+      }]
+    },
+    external_urls: {
+      spotify: ''
+    }
   }
   trackId = -1;
 
