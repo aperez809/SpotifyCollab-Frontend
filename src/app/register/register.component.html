@@ -1,17 +1,50 @@
-<div className="container">
-  <h3 *ngIf="registerFailed" style="color:red">Username Already Taken, Try Again!</h3>
+<div class="container-fluid">
   <h1>Register New User</h1>
-  <div>
-  Username:
-  <input [(ngModel)]="username" type="text" placeholder="user123"/>
-  Password:
-  <input [(ngModel)]="password" type="password" placeholder="********"/>
-  First Name:
-  <input [(ngModel)]="firstName" type="text" placeholder="John"/>
-  Last Name:
-  <input [(ngModel)]="lastName" type="text" placeholder="Doe"/>
-  <button (click)="register()">
-    Register
-  </button>
-  </div>
+  <form>
+      <div class="form-group mt-2 col-12 col-sm-8 col-md-6">
+        <label for="inputUsername">Username</label>
+        <input type="text" 
+          [(ngModel)]="username"
+          name="username"
+          class="form-control" 
+          id="inputFirstName" 
+          aria-describedby="usernameHelp" 
+          placeholder="Username">
+      </div>
+      <div class="form-group col-12 col-sm-8 col-md-6">
+        <label for="inputFirstName">First Name</label>
+        <input type="text" 
+          [(ngModel)]="firstName"
+          name="firstname"
+          class="form-control" 
+          id="inputFirstName" 
+          aria-describedby="firstNameHelp" 
+          placeholder="First Name">
+      </div>
+      <div class="form-group col-12 col-sm-8 col-md-6">
+        <label for="inputLastName">Last Name</label>
+        <input type="text" 
+          [(ngModel)]="lastName"
+          name="lastname"
+          class="form-control" 
+          id="inputLastName" 
+          aria-describedby="LastNameHelp" 
+          placeholder="Last Name">
+      </div>
+      <div class="form-group col-12 col-sm-8 col-md-6">
+        <label for="inputPassword">Password</label>
+        <input type="password" 
+        [(ngModel)]="password"
+        name="password"
+        class="form-control" 
+        id="inputPassword" 
+        placeholder="Password">
+      </div>
+      <button
+        class="btn btn-success text-light mt-3 ml-3"
+        role="button"
+        (click)="register()">
+        Create Account
+      </button>
+    </form>
 </div>
