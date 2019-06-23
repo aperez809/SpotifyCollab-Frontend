@@ -1,28 +1,39 @@
 <div class="container">
-  <div class="col-12">
-    <h1>{{album.name}}</h1>
-    <h6>Artists: </h6>
-    <ul>
-      <li *ngFor="let artist of album.artists">
-        <a href="#" routerLink="/artist/{{artist.id}}">{{artist.name}}</a>
-        </li>
-    </ul>
-    <img src="{{album.images[0].url}}"/>
-    <h6>Tracks:</h6>
+    <div class="row">
+      <h1>{{album.name}}</h1>
+    </div>
+    <div class="row">
+      <h6>Artists: </h6>
+    </div>
+    <div class="row">
+      <ul class="list-group">
+        <a class="ml-3" *ngFor="let artist of album.artists">
+          <h4 href="#" routerLink="/artist/{{artist.id}}">{{artist.name}}</h4>
+        </a>
+      </ul>
+    </div>  
+    <div class="row">
+      <img height="300" width="300" src="{{album.images[0].url}}"/>
+    </div>
+    <div class="row mt-2">
+      <h4>Information:</h4>
+    </div>
+    <div>
+      <h5>Album Type: {{album.album_type}}</h5>
+      <h5>Label: {{album.label}}</h5>
+      <h5>Popularity Score: {{album.popularity}}</h5>
+      <h5>Release Date: {{album.release_date}}</h5>
+    </div>
+    <h2 class="mt-3">Tracks:</h2>
     <ul class="list-group">
-
-      <li *ngFor="let track of album.tracks.items" class="list-group-item">
-        {{track.name}}  By: {{track.artists[0].name}}
-        <button class="btn btn-primary float-right">Add to Queue</button>
-        <a class="btn btn-secondary float-right" href="#" routerLink="/track/{{track.id}}">Go To</a>
+      <li *ngFor="let track of album.tracks.items" class="list-group-item" routerLink="/track/{{track.id}}">
+        <h4 class="text-dark font-weight-bold">
+            {{track.name}} 
+        </h4>
+        <a class="text-dark font-weight-light">
+            {{track.artists[0].name}}
+        </a>
       </li>
     </ul>
-
-    <p>Album Type: {{album.album_type}}</p>
-    <p>Label: {{album.label}}</p>
-    <p>Popularity Score: {{album.popularity}}</p>
-    <p>Release Date: {{album.release_date}}</p>
-
   </div>
-</div>
 
