@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user-service-client';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
+import { PartyService } from '../services/party-service-client';
 
 @Component({
   selector: 'app-profile',
@@ -53,6 +54,7 @@ export class ProfileComponent implements OnInit {
       private spotifyService: SpotifyServiceClient, 
       private activatedRoute: ActivatedRoute,
       private modalService: NgbModal,
+      private partyService: PartyService,
       private userService: UserService,
       private cookieService: CookieService,
       private router: Router) 
@@ -93,11 +95,28 @@ export class ProfileComponent implements OnInit {
       }
   }
 
+  /*
+  addTrackToQueue = () => {
+    this.partyService.addSongToQueue(
+      this.cookieService.get("currentPartyId"),
+      this.cookieService.get("_id"),
+      this.selectedSong["name"],
+      this.selectedSong["artists"][0]["name"])
+  }
+*/
+
   addRecentTrack = (spotifyId, trackName, artistName) => {
     this.userService.addRecentTrack(this.cookieService.get("_id"),
         spotifyId, trackName, artistName)
       .then(res => {
-        return
+        this.partyService.addSongToQueue(this.cookieService.get("currentPartyId"), 
+          spotifyId, 
+          trackName, 
+          artistName,
+          this.cookieService.get("_id"))
+          .then(res => {
+            return
+          })
       })
   }
 

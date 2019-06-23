@@ -158,9 +158,10 @@ export class SearchComponent implements OnInit {
     console.log("Step 1")
     this.partyService.addSongToQueue(
       this.cookieService.get("currentPartyId"),
-      this.cookieService.get("_id"),
+      this.selectedSong["id"],
       this.selectedSong["name"],
-      this.selectedSong["artists"][0]["name"])
+      this.selectedSong["artists"][0]["name"],
+      this.cookieService.get("_id"))
   }
 
 }

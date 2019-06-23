@@ -87,7 +87,7 @@ export class PartyService {
     });
   }
 
-  addSongToQueue = (pid, trackId, trackName, artistName) => {
+  addSongToQueue = (pid, trackId, trackName, artistName, userId) => {
     return fetch("http://song-request-server-node.herokuapp.com/api/parties/" + pid + "/addSong", {
       method: 'PUT',
       headers: {
@@ -96,7 +96,8 @@ export class PartyService {
       body: JSON.stringify({
         "spotifyId": trackId,
         "trackName": trackName,
-        "artistName": artistName
+        "artistName": artistName,
+        "userId": userId
       })
     });
   }
