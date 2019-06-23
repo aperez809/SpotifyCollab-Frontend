@@ -87,6 +87,14 @@ export class PartyComponent implements OnInit {
     await this.router.navigate(['']);
   }
 
+  removeFromQueue(id) {
+    this.partyService.removeSongFromQueue(this.partyId, id)
+      .then(res => {
+        this.router.navigate(['/party', this.partyId])
+        this.ngOnInit();
+      })
+  }
+
   myParty() {
     return this.cookieService.get("username") == this.party.partyLeader.username;
   }
