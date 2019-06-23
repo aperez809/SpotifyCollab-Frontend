@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
       .then(userData => {
         if (userData) {
           this.userService.assignSessionToUser(userData);
-          this.router.navigate(['profile', userData["_id"]]);
+          this.router.navigate(['profile']);
         }
       });
   }
