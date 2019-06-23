@@ -26,10 +26,6 @@
                 class="nav-item">
                 <a class="nav-link" routerLink="/search" href="#">Search</a>
             </li>
-            <li *ngIf="!inParty()"
-                class="nav-item">
-                <a class="nav-link" routerLink="/" href="#">Join a Party</a>
-            </li>
             <li class="d-block d-sm-none">
                 <a class="nav-link active"
                 *ngIf="loggedIn()">
@@ -38,6 +34,10 @@
             </li>
         </ul>
         <span class="navbar-text">
+            <a class="nav-link"
+                *ngIf="!inParty()" 
+                routerLink="/" 
+                href="#">Join Party</a>
             <a class="nav-link active"
                 *ngIf="inParty()">
                 {{ currentPartyName() }}
@@ -45,7 +45,8 @@
         </span>
         <span class="navbar-text">
             <a class="nav-link active"
-                *ngIf="loggedIn()">
+                *ngIf="loggedIn()"
+                routerLink="/profile">
                 {{ currentUsername() }}
             </a>
         </span>

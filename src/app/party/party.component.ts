@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PartyService } from '../services/party-service-client'
 import { UserService } from '../services/user-service-client';
 import { CookieService } from 'ngx-cookie-service';
@@ -27,7 +27,8 @@ export class PartyComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
               private partyService: PartyService,
               private userService: UserService,
-              private cookieService: CookieService) { }
+              private cookieService: CookieService,
+              private router: Router) { }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(
@@ -68,6 +69,7 @@ export class PartyComponent implements OnInit {
         await this.partyService.removeAttendee(currPartyId, currUserId);
         await this.userService.updateUserParty(currUserId, null);
         await this.cookieService.set("currentPartyId", null, undefined, "/");
+        await this.router.navigate(['']);
       }
     }
 

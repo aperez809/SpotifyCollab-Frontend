@@ -11,10 +11,17 @@
           </button>
           <button
             class="btn btn-danger text-light"
-            *ngIf="inParty()"
+            *ngIf="inParty() && !myParty()"
             role="button"
             (click)="leaveParty()">
             Leave Party
+          </button>
+          <button
+            class="btn btn-danger text-light"
+            *ngIf="myParty()"
+            role="button"
+            (click)="leaveParty()">
+            End Party
           </button>
         </div>
     </div>
@@ -30,7 +37,7 @@
       <div class="col-4">
           <ul>
             <li *ngFor="let user of party.attendees">
-              <a href="#" routerLink="/profile/user._id">{{user.username}}</a>
+              <a href="#" routerLink="/profile/{{user._id}}">{{user.username}}</a>
             </li>
           </ul>
       </div>
