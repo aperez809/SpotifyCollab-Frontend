@@ -29,7 +29,7 @@
             </li>
             <li class="d-block d-sm-none">
                 <a class="nav-link active"
-                *ngIf="this.cookieService.check('_id')">
+                *ngIf="loggedIn()">
                     Logged In:
                 </a>
             </li>
